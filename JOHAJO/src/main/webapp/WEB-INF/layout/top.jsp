@@ -96,8 +96,6 @@
 	    letter-spacing: 1px;
 	    font-family: 'Open Sans', 'sans-serif', 'Arial';
 	    font-weight: 700;
-	    
-		
 	}
 	div.mini{
 		position: relative;
@@ -113,23 +111,35 @@
 		padding: 0 4px;
 		font-size: 10px;
 	}
+	
 </style>
 <script type="text/javascript">
 var sub="";
 	$(function(){
-		$("div.mainMenu ul li ul.sub").hide();
+		$("div.mainMenu ul li ul.sub").css("display","none");
 		
 		$("div.mainMenu>ul>li>span>a").on('mouseover', function(){
-		
-	       	$(this).parent().next('.sub').show();
+			var a=$(this).text();
+			var b=$(this).parent().next().text();
+			//alert(a+"메롱"+b);
+			if(a=="MENU"){
+				$("div.mainMenu>ul>li>ul.s1").show();
+			}
+			if(a=="STORE"){
+				$("div.mainMenu>ul>li>ul.s2").show();
+			}
+			if(a=="RESERVATION"){
+				$("div.mainMenu>ul>li>ul.s3").show();
+			}
+			if(a=="NOTICE"){
+				$("div.mainMenu>ul>li>ul.s4").show();
+			}
 	    }).on('mouseout',function(){
 	    	
 	    	$(this).parent().next().hide();
-	    	$(this).parent().next('.sub').show();
+	    	//$(this).parent().next('.sub').show();
 	    	
 	    });
-		
-		
 		$("div.mainMenu>ul>li ul.sub").on('mouseover', function(){
 			$(this).show();
 		 }).on('mouseout',function(){
@@ -159,7 +169,7 @@ var sub="";
 					<ul class="sub s1">
 						<li><a href="menulist.do">메뉴</a></li>
 						<li><a href="#">코스</a></li>
-						<li><a href="#">원산지</a></li>
+						<li><a href="#">원산지</a></li> 	
 						<li><a href="#">알레르기</a></li>
 					</ul>
 				</li>
