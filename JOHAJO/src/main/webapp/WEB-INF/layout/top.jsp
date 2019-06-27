@@ -120,15 +120,13 @@ $(function(){
 	$("div.mainMenu>ul>li>span>a").on('mouseover', function(){
 		
 		$("div.mainMenu ul li ul.sub").hide();
-       	$(this).parent().next('.sub').show();
        	$(this).parent().next('.sub').addClass("on");
+       	$(this).parent().next('.sub').show();
        
        	
     }).on('mouseout',function(){
     	$("div.mainMenu ul li ul.sub").removeClass("on");
     });
-	
-	
 }); 
 </script>
 </head>
@@ -189,8 +187,6 @@ $(function(){
 		</div>
 		
 	</div>
-
-	
 	
 </body>
 </html>
