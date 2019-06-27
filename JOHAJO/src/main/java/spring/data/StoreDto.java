@@ -2,7 +2,7 @@ package spring.data;
 
 public class StoreDto {
 
-	private int num;
+	private int idx;
 	private String name;
 	private String Ohours;
 	private String phone;
@@ -11,11 +11,12 @@ public class StoreDto {
 	private String ypoint;
 	private String addr;
 	
-	public int getNum() {
-		return num;
+
+	public int getIdx() {
+		return idx;
 	}
-	public void setNum(int num) {
-		this.num = num;
+	public void setIdx(int idx) {
+		this.idx = idx;
 	}
 	public String getName() {
 		return name;

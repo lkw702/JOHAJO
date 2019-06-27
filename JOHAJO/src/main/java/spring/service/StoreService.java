@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import spring.data.StoreDao;
+import spring.data.StoreDto;
 
 @Service
 public class StoreService {
@@ -14,4 +15,8 @@ public class StoreService {
 		return dao.getTotalCount();
 	}
 	
+	public StoreDto getData(int num)
+	{
+		return dao.getData(num);
+	}
 }

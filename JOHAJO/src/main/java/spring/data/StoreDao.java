@@ -11,4 +11,9 @@ public class StoreDao extends SqlSessionDaoSupport {
 		return n;
 	}
 	
+	public StoreDto getData(int num)
+	{
+		StoreDto dto=getSqlSession().selectOne("storeGetData",num);
+		return dto;
+	}	
 }

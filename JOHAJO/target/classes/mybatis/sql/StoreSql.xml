@@ -6,4 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="storeTotalCount" resultType="int">
 		select count(*) from store
 	</select>
+	<select id="storeGetData" parameterType="int" resultType="sdto">
+		select * from store where idx=#{idx}
+	</select>
 </mapper>
