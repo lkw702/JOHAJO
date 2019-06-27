@@ -10,8 +10,5 @@ public class ReservationService {
 	@Autowired
 	private ReservationDao dao;
 	
-	public String getReservationList() {
-		return dao.getReservationList();
-	}
 	
 }

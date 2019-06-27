@@ -7,9 +7,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class NoticeDao extends SqlSessionDaoSupport {
 	
 
-	@RequestMapping("noticelist.do")
-	public String getNoticeList() {
-		// TODO Auto-generated method stub
-		return "notice/noticeList";
-	}
+	
 }

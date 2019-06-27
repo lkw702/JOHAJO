@@ -11,7 +11,5 @@ public class MenuService {
 	@Autowired
 	private MenuDao dao;
 
-	public String getMenuList(int startNum, int endNum){
-		return dao.getMenuList(startNum, endNum);
-	}
+	
 }

@@ -8,8 +8,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+<!-- google map API -->
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCzHxv7okfaTei_0eZFMzhSw6cnN-dITSg" ></script>
 </head>
 <body>
-매장안내 페이지 입니다.
+뭬자이잉<br>
+데이터 베이스의 총 카운트 : ${totalCount}
+
 </body>
 </html>

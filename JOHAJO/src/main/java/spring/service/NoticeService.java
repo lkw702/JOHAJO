@@ -10,7 +10,5 @@ public class NoticeService {
 	@Autowired
 	private NoticeDao dao;
 	
-	public String getNoticeList(){
-		return dao.getNoticeList();
-	}
+
 }

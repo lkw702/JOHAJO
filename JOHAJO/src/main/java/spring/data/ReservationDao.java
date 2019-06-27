@@ -6,10 +6,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Repository
 public class ReservationDao extends SqlSessionDaoSupport {
 
-	@RequestMapping("reslist.do")
-	public String getReservationList() {
-		// TODO Auto-generated method stub
-		return "res/reservationList";
-	}
 
 }

@@ -10,7 +10,8 @@ public class StoreService {
 	@Autowired
 	private StoreDao dao;
 	
-	public String getMenuList(){
-		return dao.getStoreList();
+	public int getTotalCount() {
+		return dao.getTotalCount();
 	}
+	
 }

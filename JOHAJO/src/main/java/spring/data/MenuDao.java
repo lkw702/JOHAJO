@@ -12,9 +12,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MenuDao extends SqlSessionDaoSupport {
 	
 
-	@RequestMapping("menulist.do")
-	public String getMenuList(int startNum, int endNum) {
-		// TODO Auto-generated method stub
-		return "menu/menuList";
-	}
+	
 }
