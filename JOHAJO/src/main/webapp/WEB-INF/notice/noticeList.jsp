@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
- notice 공지사항 입니다.
+ notice 공지사항 입니다.zzzzz
 </body>
 </html>
