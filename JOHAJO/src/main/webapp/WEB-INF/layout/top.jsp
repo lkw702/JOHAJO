@@ -131,14 +131,23 @@ $(function(){
 </script>
 </head>
 <body>
-	
+<%
+	String loginok   = (String)session.getAttribute("loginok");		
+%>
 <c:set var="root" value="<%=request.getContextPath() %>"></c:set>
 	<div class="topMenu">
 	
 		<div class="mini">
 			<span>
-				 <a href="#">LOGIN</a>
-				 <a href="#">JOIN</a>
+				 <c:if test="${loginok =='yes'}">
+				 	<a href="userLogout.do">LOG OUT</a>
+				 	<a href="mypageform.do">MYPAGE</a>
+				 </c:if>
+				 <c:if test="${loginok == NULL || loginok.equals('no')}">
+				 	<a href="loginform.do">LOGIN</a>
+				 	<a href="joinform.do">JOIN</a>
+				 </c:if>
+				 
 				 <a href="#">CUSTOMER</a>
 			</span>
 		</div>	

@@ -14,11 +14,25 @@
 		<put-attribute name="main" value="/WEB-INF/layout/main.jsp"/>
 	</definition>
 	
+	<!--popup-tiles 추가  -->
+	 <definition name="popup-tiles" template="/WEB-INF/layout/popup.jsp">
+	  <put-attribute name="popup"   value="" />
+	 </definition>
+ 
+ 
 	
 <!-- macro -->
+
+	
+	 
 	<definition name="/*/*" extends="mainLayout">
 		<put-attribute name="main" value="/WEB-INF/{1}/{2}.jsp"/>
 	</definition>
+	<!--popup-tiles 추가  -->
+	<definition name="/pop/*/*" extends="popup-tiles">
+	  <put-attribute name="popup"   value="/WEB-INF/{1}/{2}.jsp" />
+	 </definition>
+	
 
 </tiles-definitions>  
 

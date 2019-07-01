@@ -157,14 +157,14 @@
 		    <version>1.4</version>
 		</dependency>
 
-	<dependency>
+	<!-- <dependency>
 			 <groupId>ojdbc</groupId>
 			 <artifactId>ojdbc</artifactId>
 			 <version>14</version>
 			 <scope>system</scope>
 			 <systemPath>D:\it0312\util\ojdbc14.jar</systemPath>
  		</dependency>	
-
+ -->
 	</dependencies>	
 </project>
 
