@@ -9,4 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="storeGetData" parameterType="int" resultType="sdto">
 		select * from store where idx=#{idx}
 	</select>
+	<select id="storeGetAllData" resultType="sdto">
+		select * from store
+	</select>
 </mapper>

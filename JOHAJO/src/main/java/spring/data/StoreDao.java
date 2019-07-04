@@ -1,5 +1,9 @@
 package spring.data;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +20,10 @@ public class StoreDao extends SqlSessionDaoSupport {
 		StoreDto dto=getSqlSession().selectOne("storeGetData",num);
 		return dto;
 	}	
+	public List<StoreDto> getAllData()
+	{
+		List<StoreDto> list=new ArrayList<StoreDto>();
+		list=getSqlSession().selectList("storeGetAllData");
+		return list;
+	}
 }

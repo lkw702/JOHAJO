@@ -1,5 +1,7 @@
 package spring.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,5 +20,9 @@ public class StoreService {
 	public StoreDto getData(int num)
 	{
 		return dao.getData(num);
+	}
+	public List<StoreDto> getAllData()
+	{
+		return dao.getAllData();
 	}
 }
