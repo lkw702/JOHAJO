@@ -7,11 +7,17 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="spring.data.MenuDto" alias="bdto"/>
 		<typeAlias type="spring.data.StoreDto" alias="sdto"/>
 		<typeAlias type="spring.data.MemberDto" alias="mdto"/>
+		<typeAlias type="spring.data.NoticeDto" alias="ndto"/>
+		<typeAlias type="spring.data.EventDto" alias="edto"/>
+		<typeAlias type="spring.data.FaqDto" alias="fdto"/>
 	</typeAliases>
 
 	<mappers>
 		<mapper resource="mybatis/sql/BoardSql.xml"/>
 		<mapper resource="mybatis/sql/StoreSql.xml"/>
 		<mapper resource="mybatis/sql/MemberSql.xml"/>
+		<mapper resource="mybatis/sql/NoticeSql.xml"/>
+		<mapper resource="mybatis/sql/EventSql.xml"/>
+		<mapper resource="mybatis/sql/FaqSql.xml"/>
 	</mappers>
 </configuration>

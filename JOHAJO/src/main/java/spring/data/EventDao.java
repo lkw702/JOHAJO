@@ -8,26 +8,25 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class NoticeDao extends SqlSessionDaoSupport {
+public class EventDao extends SqlSessionDaoSupport {
 	
 	public int getTotalCount()
 	{
-		int n=getSqlSession().selectOne("noticeTotalCount");
+		int n=getSqlSession().selectOne("eventTotalCount");
 		return n;
 	}
 	
-	public List<NoticeDto> getList(int start, int end)
+	public List<EventDto> getList(int start, int end)
 	{
 		Map<String, Integer> map=new HashMap<String, Integer>();
 		map.put("start", start);
 		map.put("end", end);
 		
-		return getSqlSession().selectList("noticePagingList",map);
-				
+		return getSqlSession().selectList("eventPagingList",map);		
 	}
 	
-	public NoticeDto getData(int num)
+	public EventDto getData(int num)
 	{
-		return getSqlSession().selectOne("noticeSelectData",num);
+		return getSqlSession().selectOne("eventSelectData",num);
 	}
 }

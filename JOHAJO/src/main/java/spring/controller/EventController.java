@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import spring.data.NoticeDto;
-import spring.service.NoticeService;
+import spring.data.EventDto;
+import spring.service.EventService;
 
 @Controller
-public class NoticeController {
+public class EventController {
 	@Autowired
-	public NoticeService service;
+	public EventService service;
 	
 	//공지사항
-	@RequestMapping("/noticelist.do")
+	@RequestMapping("/noticeevent.do")
 	public ModelAndView list(@RequestParam(value="pageNum",defaultValue="1") int currentPage){
 		ModelAndView model=new ModelAndView();
 		
@@ -53,7 +53,7 @@ public class NoticeController {
 			no=totalCount-(currentPage-1)*perPage;	
 			
 			//전체 데이터 가져오기
-			List<NoticeDto> list=service.getList(startNum, endNum);
+			List<EventDto> list=service.getList(startNum, endNum);
 			
 			model.addObject("list", list);
 			model.addObject("currentPage", currentPage);
@@ -65,24 +65,32 @@ public class NoticeController {
 		
 		model.addObject("totalCount",totalCount);
 		
-		model.setViewName("/notice/noticeList");
+		model.setViewName("/notice/noticeEvent");
 		return model;
 	}
 	
-	@RequestMapping("/noticelist_content.do")
-	public String content(Model model,@RequestParam int num, @RequestParam int pageNum)
+	@RequestMapping("/noticeEvent_content.do")
+	public String content(Model model,@RequestParam int idx, @RequestParam int pageNum)
 	{	
 		//데이터 가져오기
-		NoticeDto dto=service.getData(num);
+		EventDto dto=service.getData(idx);
 		dto.setContent(dto.getContent().replace("\n","<br>"));
 		//model에 저장
 		model.addAttribute("dto",dto);
 		model.addAttribute("pageNum",pageNum);
 		
-		return "/notice/noticeList_content";
+		return "/notice/noticeEvent_content";
 	}
 	
-	
-	
+	//이벤트 - 당첨자발표 ( 결과페이지에서 당첨자발표로 돌아가기 위함 )
+	@RequestMapping("/event_win.do")
+	public String NoticeEvent_win(){
+		return "/notice/noticeEvent_win";
+	}
+	//이벤트 - 당첨자발표 - 결과페이지 
+	@RequestMapping("/event_lotto.do")
+	public String NoticeEvent_lotto(){
+		return "/notice/noticeEvent_lotto";
+	}
 	
 }

@@ -5,26 +5,27 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import spring.data.NoticeDao;
-import spring.data.NoticeDto;
+import spring.data.FaqDao;
+import spring.data.FaqDto;
+
 
 @Service
-public class NoticeService {
+public class FaqService {
 	@Autowired
-	private NoticeDao dao;
+	private FaqDao dao;
 	
 	public int getTotalCount()
 	{
 		return dao.getTotalCount();
 	}
-
-	public List<NoticeDto> getList(int start,int end)
+	
+	public List<FaqDto> getList(int start, int end)
 	{
-		return dao.getList(start, end);
+		return dao.getList(start,end);
 	}
 	
-	public NoticeDto getData(int num)
+	public FaqDto getData(int idx)
 	{
-		return dao.getData(num);
+		return dao.getData(idx);
 	}
 }

@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import spring.data.NoticeDto;
-import spring.service.NoticeService;
+import spring.data.FaqDto;
+import spring.service.FaqService;
 
 @Controller
-public class NoticeController {
+public class FaqController {
 	@Autowired
-	public NoticeService service;
+	public FaqService service;
 	
-	//공지사항
-	@RequestMapping("/noticelist.do")
+	//자주묻는 질문
+	@RequestMapping("/noticefaq.do")
 	public ModelAndView list(@RequestParam(value="pageNum",defaultValue="1") int currentPage){
 		ModelAndView model=new ModelAndView();
 		
@@ -53,7 +53,7 @@ public class NoticeController {
 			no=totalCount-(currentPage-1)*perPage;	
 			
 			//전체 데이터 가져오기
-			List<NoticeDto> list=service.getList(startNum, endNum);
+			List<FaqDto> list=service.getList(startNum, endNum);
 			
 			model.addObject("list", list);
 			model.addObject("currentPage", currentPage);
@@ -65,24 +65,22 @@ public class NoticeController {
 		
 		model.addObject("totalCount",totalCount);
 		
-		model.setViewName("/notice/noticeList");
+		model.setViewName("/notice/noticeFaq");
 		return model;
 	}
 	
-	@RequestMapping("/noticelist_content.do")
-	public String content(Model model,@RequestParam int num, @RequestParam int pageNum)
+	@RequestMapping("/noticefaq_content.do")
+	public String content(Model model,@RequestParam int idx, @RequestParam int pageNum)
 	{	
 		//데이터 가져오기
-		NoticeDto dto=service.getData(num);
-		dto.setContent(dto.getContent().replace("\n","<br>"));
+		FaqDto dto=service.getData(idx);
+		//dto.setContents(dto.getContents().replace("\n","<br>"));
 		//model에 저장
 		model.addAttribute("dto",dto);
 		model.addAttribute("pageNum",pageNum);
 		
-		return "/notice/noticeList_content";
+		return "/notice/noticeFaq_content";
 	}
-	
-	
 	
 	
 }

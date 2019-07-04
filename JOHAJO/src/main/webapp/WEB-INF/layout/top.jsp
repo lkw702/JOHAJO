@@ -159,9 +159,8 @@ $(function(){
 					<span><a href="menulist.do">MENU</a></span>
 					<ul class="sub s1">
 						<li><a href="menulist.do">메뉴</a></li>
-						<li><a href="#">코스</a></li>
-						<li><a href="#">원산지</a></li>
-						<li><a href="#">알레르기</a></li>
+						<li><a href="menucourse.do">코스</a></li>
+						<li><a href="menuallergy.do">알레르기</a></li>
 					</ul>
 				</li>
 				<li>
@@ -180,8 +179,8 @@ $(function(){
 					<span><a href="noticelist.do">NOTICE</a></span>
 					<ul class="sub s4">
 						<li><a href="noticelist.do">공지사항</a></li>
-						<li><a href="#">이벤트</a></li>
-						<li><a href="#">Q＆A</a></li>
+						<li><a href="noticefaq.do">FAQ</a></li>
+						<li><a href="noticeevent.do">이벤트</a></li>
 					</ul>
 				</li>
 				<!-- <li><span><a href="#">BRAND</a></span>
