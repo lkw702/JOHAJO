@@ -26,5 +26,16 @@ public class MemberService {
 		return dao.userLoginByIdandPW(map);
 	}
 
+	
+	public MemberDto selectUserId(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return dao.selectUserId(map);
+	}
+
+	public MemberDto selectUserPw(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return dao.selectUserPw(map);
+	}
+
 
 }

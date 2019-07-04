@@ -35,13 +35,49 @@ $(function(){
 		$("#hp1").val($(this).val());
 		console.log($(this).val());
 	});
+	
+	/* $("#password").on("keyup", function() {
+		if($(this).val() != $("#password1").val()){
+			alert("비밀번호가 일치하지않습니다.");
+			$(this).focus();
+			return false;
+		}
+	    
+	}); */
+	
+	
+	$("#hp2,#hp3").on("keyup", function() {
+	    $(this).val($(this).val().replace(/[^0-9]/g,""));
+	    $(this).val($(this).val().substring(0,4));
+	});
+
+
+	
 
 });
 
 function idch(){
 	var url="idCheck.pop";
-	var option="width=370,height=360,resizable=no,scrollbars=no,status=no";
+	var option="width=350,height=220,resizable=no,scrollbars=no,status=no";
 	window.open(url,"",option);
+}
+
+function joinCheck(){
+	if($("#id").val() == ""){
+		alert("아이디 체크를 클릭해주세요");
+		return false;
+	}
+	
+	if($("#password").val() != $("#password1").val()){
+		alert("비밀번호를 정확히 입력해주세요");
+		$("#password1").val("");
+		$("#password").val("");
+		$("#password1").focus();
+		return false;
+	}
+	
+	
+	
 }
 
 </script>
@@ -104,13 +140,21 @@ function idch(){
 		font-size: 15px;
 		font-weight: bold;
 	}
+	
+
+	
+.btnlist {
+	    text-align: center;
+    position: relative;
+    width: 500px;
+    margin: 0 auto;
+	text-align: center;
+}
 
 </style>
 </head>
 <body>
-
-	<form name="mJoinForm" action="memberInsert.do" method="post">
-	<div class="center">
+	<form name="mJoinForm" onsubmit="return joinCheck();" action="memberInsert.do" method="post">
 	<div class="joinform">
 		<span class="subejct">Single Dinner</span>
 		
@@ -120,13 +164,13 @@ function idch(){
 				<li>
 					<span>아이디</span> 
 					<input type="text" name="id" class="id" readonly="readonly" required="required">
-					<button type="button"  onclick="idch();">아이디체크</button>
+					<button type="button"  onclick="javascriprt:idch();" required="required">아이디체크</button>
 				</li>
 				<li>
 					<span>비밀번호 </span>
-					<input type="password" name="password" autofocus="autofocus" required="required"
+					<input type="password" name="password1" id="password1"  autofocus="autofocus" required="required"
 					placeholder="비밀번호(6~16자)" size="16"> 
-					<input type="password" name="password2" autofocus="autofocus" required="required"
+					<input type="password" name="password" id="password" autofocus="autofocus" required="required"
 					placeholder="비밀번호 확인 ">
 				</li>
 				<li>
@@ -138,7 +182,7 @@ function idch(){
 				<li>
 					<span>휴대폰</span>
 					<input type="hidden" name="hp1" id="hp1"> 
-					<select name="hp" id="hp">
+					<select name="hp" id="hp" required="required">
 						<option value="" selected>선택</option>
 						<option value="010">010</option>
 						<option value="011">011</option>
@@ -146,14 +190,14 @@ function idch(){
 						<option value="017">017</option>
 						<option value="019">019</option>
 					</select> - 
-					<input type="text" name="hp2" size="4" autofocus="autofocus"> - 
-					<input type="text" name="hp3" size="4" autofocus="autofocus">
+					<input type="text" name="hp2" id="hp2" size="4"  autofocus="autofocus" required="required"> - 
+					<input type="text" name="hp3" id="hp3" size="4"  autofocus="autofocus" required="required">
 				</li>
 			
 				
 				<li>
 					<span>이메일</span>
-					<input type="text" name="email" autofocus="autofocus" required="required"
+					<input type="email" name="email" id="email" autofocus="autofocus" required="required"
 					placeholder="이메일 ">
 				</li>
 			</ul>
@@ -179,13 +223,15 @@ function idch(){
 		</div>
 		
 	</div>
-	</div>
+	
 	<!-- 버튼 -->
-	<div class="btnform">
-		<div class="btn "><button type="button">취소</button></div>
-		<div class="btn btn2"><button type="submit">등록</button></div>
+	
+	<div class="btnlist">
+		<div class="">
+			<button type="button">취소</button> 
+			<button type="submit">등록</button>
+		</div>
 	</div>
 	</form>
-	
 </body>
 </html>

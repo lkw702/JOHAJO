@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<insert id="memberInsert" parameterType="mdto">
 		insert into member values(seq_member.nextval, 
-		#{id},#{password},#{name},#{hp},#{email},#{gender},#{birth})
+		#{id},#{password},#{name},#{hp},#{email},#{gender},#{birth},sysdate)
 	</insert>
 	<select id="memberIdCheck" parameterType="String" resultType="int">
 		select count(*) from member where id=#{id}
@@ -16,4 +16,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="memberLogin"  parameterType="HashMap" resultType="mdto">
 		select * from member where id=#{id} and password=#{password}
 	</select>
+	
+	<select id="selectUserId"  parameterType="HashMap" resultType="mdto">
+		select rpad(substr(id,0,3),length(id),'*')as id, 
+		concat('20',replace(substr(joindate,0,9),'/','.'))as joindate
+		 from member where name=#{name} and hp=#{hp}
+	</select>
+	
+	<select id="selectUserPw"  parameterType="HashMap" resultType="mdto">
+		select name, rpad(substr(password,0,3),
+		length(password),'*')as password
+		from member where id=#{id} and hp=#{hp}
+	</select>
+	
+	
 </mapper>

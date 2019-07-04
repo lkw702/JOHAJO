@@ -12,44 +12,115 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
+<style type="text/css">
 
+	.mt100{
+		margin-top:100px; 
+	}
+	.mt30{
+		margin-top:30px; 
+	}
+	span.logo{
+		font-size: 57px;
+		text-align: center;
+		display: inline-block;
+		width: 100%;
+	}
+	
+	div.content{
+		position: relative;
+	    width: 380px;
+	    margin: 30px auto 0;
+	    padding: 63px 0;
+	}
+	
+	span.top1{
+	    text-align: left;
+    	margin-left: 10px;
+    	line-height: 30px;
+    	font-size: 15px;
+	}
+	span.top2{
+		float: right;
+	}
+	span.top2 a{
+		color: #000000;
+		text-decoration: none;
+		font-size: 12px;
+	    margin-right: 7px;
+	    letter-spacing: -2px;
+	}
+	
+	div.loginform{
+		position: relative;
+		width: 100%;
+	}
+	
+	div.loginform input[type=text],
+	div.loginform input[type=password]{
+		width: 100%;
+		line-height: 40px;
+		padding-left:10px;
+	}
+	
+	button.submit{
+		width: 100%;
+	    margin-top:10px;
+	    line-height: 46px;
+	    color: #fff;
+	    font-weight: bold;
+	    background-color: #000;
+	    border: 0;
+	    
+	}
+</style>
+<script type="text/javascript">
+</script>
 </head>
 <body>
-<form name="login" action="memberlogin.do" method="post">
-<%
-		String saveok = (String)session.getAttribute("saveok");
-		String myid   = (String)session.getAttribute("idok");
-		
-		boolean isSave;
-		if(saveok == null || saveok.equals("no"))
-			isSave = false;
-		else
-			isSave = true;
-		
-	%>
-<div>
-	<ul>
-		<li>
-			<div>
-				<input type="checkbox" name="chkid" id="chkid" value="yes" <%=isSave?"checked":"" %>>
+<%-- <c:set var="log2" value="${log}"/>
+<c:if test="${log2 =='false'}">
+<script type="text/javascript">
+	alert("아이디아 비밀번호를 정확히 입력해주세요");
+</script>
+<c:remove var="log2"/>
+</c:if> --%>
+<c:if test="${saveok == 'no'}">
+<c:set var="isSave" value="false"/>
+</c:if>
+
+<c:if test="${saveok == 'yes'}">
+<c:set var="isSave" value="true"/>
+</c:if>
+
+
+	<span class="logo mt100">Single Dinner</span>
+	<div class="content">
+		<form name="login" action="memberlogin.do" method="post">
+			
+			<span class="top1">
+				<input type="checkbox" name="chkid" 
+					id="chkid" value="yes" ${isSave?'checked':''}>
 				아이디 저장
-			</div>
-			<div>
-				<a href="idSelect.do">아이디 찾기</a>
-				<a href="pwSelect.do">비밀번호 찾기</a>
+			</span>
+			<span class="top2">
+				<a href="selIdform.do">아이디찾기</a>
+				<a href="selPwform.do">비번찾기</a>
 				<a href="joinform.do">회원가입</a>
-			</div>
-		</li>
-		<li>
-			<input type="text" name="id" id="id" autofocus="autofocus" required="required"
-					placeholder="아이디입력">
-			<input type="password" name="pw" id="pw" autofocus="autofocus" required="required"
-					placeholder="비밀번호 입력">
-			<button type="submit">로그인</button>
+			</span>
+		
 				
-		</li>
-	</ul>
-</div>
-</form>
+		
+		<div class="loginform">
+			<input type="text" name="id" id="id"  value="${isSave?idok:''}" autofocus="autofocus" 
+				required="required" placeholder="아이디">
+			<input type="password" name="pw" id="pw" autofocus="autofocus" 
+				required="required" placeholder="비밀번호 ">
+			<button class="submit" type="submit">로그인</button>
+		</div>	
+		</form>	
+	</div>
+
+
 </body>
 </html>

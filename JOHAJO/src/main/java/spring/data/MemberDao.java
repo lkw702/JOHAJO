@@ -22,4 +22,15 @@ public class MemberDao  extends SqlSessionDaoSupport{
 		// TODO Auto-generated method stub
 		return getSqlSession().selectOne("memberLogin",map);
 	}
+
+	public MemberDto selectUserId(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		
+		return getSqlSession().selectOne("selectUserId",map);
+	}
+
+	public MemberDto selectUserPw(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectOne("selectUserPw",map);
+	}
 }

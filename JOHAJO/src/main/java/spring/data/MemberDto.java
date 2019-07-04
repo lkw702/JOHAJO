@@ -17,6 +17,8 @@ public class MemberDto {
 	private String month;
 	private String day;
 	
+	private String joindate;
+	
 	
 	public int getIdx() {
 		return idx;
@@ -101,6 +103,12 @@ public class MemberDto {
 	}
 	public void setDay(String day) {
 		this.day = day;
+	}
+	public String getJoindate() {
+		return joindate;
+	}
+	public void setJoindate(String joindate) {
+		this.joindate = joindate;
 	}
 	
 	
