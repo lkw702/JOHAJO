@@ -1,5 +1,7 @@
 package spring.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,21 +17,35 @@ public class StoreController {
 	@Autowired
 	private StoreService service;
 	
-	@RequestMapping("/storelist.do")
-	public String form()
+	@RequestMapping("/storeData.do")
+	public ModelAndView getData(@RequestParam int idx) 
 	{
-		return "/store/storeForm";
-	}
-	
-	@RequestMapping("/storeget.do")
-	public ModelAndView list(@RequestParam int num) {
-		
 		ModelAndView model=new ModelAndView();
-	
-		StoreDto dto=service.getData(num);
-		  
-	 	model.addObject("dto",dto);
+		
+		StoreDto dto=service.getData(idx);
+		
+		model.addObject("dto",dto);
+		model.setViewName("/store/storeData");
+		return model;
+	}
+
+	@RequestMapping("/storelist.do")
+	public ModelAndView getlist()
+
+	{
+		ModelAndView model=new ModelAndView();
+
+
+		int totalCount=service.getTotalCount();
+
+		List<StoreDto> list=service.getList();
+		
+		
+		//3. 페이징에 필요한 변수들 request에 저장		
+		model.addObject("list", list);
+		model.addObject("totalCount",totalCount);
 		model.setViewName("/store/storeList");
+		
 		return model;
 	}
 }

@@ -21,8 +21,8 @@ public class StoreService {
 	{
 		return dao.getData(num);
 	}
-	public List<StoreDto> getAllData()
+	public List<StoreDto> getList()
 	{
-		return dao.getAllData();
+		return dao.getList();
 	}
 }

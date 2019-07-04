@@ -9,7 +9,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="storeGetData" parameterType="int" resultType="sdto">
 		select * from store where idx=#{idx}
 	</select>
-	<select id="storeGetAllData" resultType="sdto">
+	<select id="storeAllData" resultType="sdto">
 		select * from store
+	</select>
+	<select id="storePagingList" parameterType="HashMap" resultType="sdto">
+	   <![CDATA[
+	   	select a.* from (select ROWNUM as RNUM,
+		b.* from (select * from store order by idx desc)b )a 
+		where a.RNUM>=#{start} and a.RNUM<=#{end}
+		 ]]>		
 	</select>
 </mapper>
