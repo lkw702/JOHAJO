@@ -29,7 +29,7 @@ public class StoreController {
 		return model;
 	}
 
-	@RequestMapping("storelist.do")
+	@RequestMapping("/storelist.do")
 	public ModelAndView getlist()
 
 	{
@@ -39,8 +39,6 @@ public class StoreController {
 		int totalCount=service.getTotalCount();
 
 		List<StoreDto> list=service.getList();
-		
-		System.out.println("이거 찍히냐");
 		
 		//3. 페이징에 필요한 변수들 request에 저장		
 		model.addObject("list", list);
