@@ -4,7 +4,7 @@ public class StoreDto {
 
 	private int idx;
 	private String name;
-	private String Ohours;
+	private String ohours;
 	private String phone;
 	private String service;
 	private String xpoint;
@@ -25,10 +25,10 @@ public class StoreDto {
 		this.name = name;
 	}
 	public String getOhours() {
-		return Ohours;
+		return ohours;
 	}
 	public void setOhours(String ohours) {
-		Ohours = ohours;
+		this.ohours = ohours;
 	}
 	public String getPhone() {
 		return phone;
@@ -60,7 +60,4 @@ public class StoreDto {
 	public void setAddr(String addr) {
 		this.addr = addr;
 	}
-	
-	
-	
 }

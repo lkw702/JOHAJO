@@ -40,7 +40,7 @@ public class ReservationController {
    public ModelAndView ReservationList() {
       ModelAndView model = new ModelAndView();
       List<StoreDto> list=new ArrayList<StoreDto>();
-	  list=service.getAllData();
+	  list=service.getList();
 	  model.addObject("list",list);
       cal.set(year,month,1);
       //System.out.println(year+"/"+month);
