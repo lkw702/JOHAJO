@@ -29,7 +29,7 @@ public class StoreController {
 		return model;
 	}
 
-	@RequestMapping("/storelist.do")
+	@RequestMapping("storelist.do")
 	public ModelAndView getlist()
 
 	{
