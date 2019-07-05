@@ -40,6 +40,7 @@ public class StoreController {
 
 		List<StoreDto> list=service.getList();
 		
+		System.out.println("이거 찍히냐");
 		
 		//3. 페이징에 필요한 변수들 request에 저장		
 		model.addObject("list", list);
