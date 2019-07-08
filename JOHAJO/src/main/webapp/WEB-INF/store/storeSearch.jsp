@@ -14,7 +14,7 @@
 <script src="<c:url value="/store/js/mapJS.js" />"></script>
 <script>
 	$(function(){
-		map1();
+		map3();
 });
 	
 	function selStore(){
@@ -50,12 +50,12 @@ div.infostore{
 </head>
 <body>
 	<div>
-		<select class="selStore" onchange="selStore()">
-			<c:forEach var="dto" items="${list }">
-				<option value="${dto.idx},${dto.name},${dto.xpoint},${dto.ypoint},${dto.addr},${dto.phone}" class="subselStore">${dto.name }</option>
+		<select class="selStore1">
+			<c:forEach var="sdto" items="${slist }">
+				<option value="${sdto.idx},${sdto.name},${sdto.xpoint},${sdto.ypoint},${sdto.addr},${sdto.phone}" class="subselStore1">${sdto.name }</option>
 			</c:forEach>
 		</select>
-		<select class="selStore1">
+		<select class="selStore" onchange="selStore()">
 			<c:forEach var="dto" items="${list }">
 				<option value="${dto.idx},${dto.name},${dto.xpoint},${dto.ypoint},${dto.addr},${dto.phone}" class="subselStore">${dto.name }</option>
 			</c:forEach>

@@ -47,4 +47,32 @@ public class StoreController {
 		
 		return model;
 	}
+	
+	@RequestMapping("/search.do")
+	public ModelAndView search(String name){
+		
+		ModelAndView model=new ModelAndView();
+		
+		int totalCount=service.searchCount(name);
+		
+		List<StoreDto> slist=service.search(name);
+		List<StoreDto> list=service.getList();
+		
+		model.addObject("list",list);
+		model.addObject("slist",slist);
+		model.addObject("totalCount",totalCount);
+		model.setViewName("/store/storeSearch");
+		return model;
+	}
+	
+	@RequestMapping("/gores.do")
+	public ModelAndView gores(@RequestParam int idx){
+		ModelAndView model=new ModelAndView();
+		
+		StoreDto dto=service.getData(idx);
+		
+		model.addObject("sdto",dto);
+		model.setViewName("redirect:reslist.do");
+		return model;
+	}
 }

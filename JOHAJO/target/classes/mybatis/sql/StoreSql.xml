@@ -19,4 +19,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where a.RNUM>=#{start} and a.RNUM<=#{end}
 		 ]]>		
 	</select>
+	<select id="storeSearch" parameterType="String" resultType="sdto">
+		select * from store where name like '%'||#{name}||'%' 
+	</select>
+	<select id="storeSearchCount" resultType="int" parameterType="String">
+		select count(*) from store where name like '%'||#{name}||'%'
+	</select>
 </mapper>

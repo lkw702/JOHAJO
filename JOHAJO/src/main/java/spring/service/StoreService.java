@@ -25,4 +25,12 @@ public class StoreService {
 	{
 		return dao.getList();
 	}
+	public List<StoreDto> search(String name)
+	{
+		return dao.search(name);
+	}
+	public int searchCount(String name)
+	{
+		return dao.searchCount(name);
+	}
 }

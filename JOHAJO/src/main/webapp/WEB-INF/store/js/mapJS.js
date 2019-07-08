@@ -1,34 +1,3 @@
-function map2(x,y,storName){
-	var myLatlng = new google.maps.LatLng(); // 위치값 위도 경도
-	var Y_point = x; // Y 좌표
-	var X_point = y; // X 좌표
-
-	var zoomLevel = 18; // 지도의 확대 레벨 : 숫자가 클수록 확대정도가 큼
-	var markerTitle = storeName; // 현재 위치 마커에 마우스를 오버을때 나타나는 정보
-	var markerMaxWidth = 300; // 마커를 클릭했을때 나타나는 말풍선의 최대 크기
-	var contentString = storeName
-
-	var myLatlng = new google.maps.LatLng(Y_point, X_point);
-	var mapOptions = {
-		zoom : zoomLevel,
-		center : myLatlng,
-		mapTypeId : google.maps.MapTypeId.ROADMAP
-	}
-	var map = new google.maps.Map(document.getElementById('storeMap1'), mapOptions);
-	var marker = new google.maps.Marker({
-		position : myLatlng,
-		map : map,
-		title : markerTitle
-	});
-	var infowindow = new google.maps.InfoWindow({
-		content : contentString,
-		maxWizzzdth : markerMaxWidth
-	});
-	google.maps.event.addListener(marker, 'click', function() {
-		infowindow.open(map, marker);
-	});
-};
-
 function ajax1(idx){
 
 	var str="";
@@ -57,7 +26,9 @@ function ajax1(idx){
 					str+="편의시설:";
 					for(var i in serviceArray)
 					str+="<span class='infoService'><img src='image/"+serviceArray[i]+".PNG' style='width:40px;'>"+serviceArray[i]+"</span>";
+					str+="<a href='gores.do?idx="+idx+"'>예약하기</a>"
 					str+="</div>";
+					
 				});
 			$(data).html(str);
 		},
@@ -96,13 +67,16 @@ function ajax2(idx){
 					str+="편의시설:";
 					for(var i in serviceArray)
 					str+="<span class='infoService'><img src='image/"+serviceArray[i]+".PNG' style='width:40px;'>"+serviceArray[i]+"</span>";
+					str+="<a href='gores.do?idx="+idx+"'>예약하기</a>"
 					str+="</div>";
 				});
-			$(data).html(str);
 			x=xpoint;
 			y=ypoint;
 			storeName=name;
-			map2(x,y,storeName);
+			addr1=addr;
+			phone1=phone;
+			$(data).html(str);
+			map2(x,y,storeName,addr1,phone1);
 		},
 		error:function(){
 			alert("error");
@@ -110,5 +84,140 @@ function ajax2(idx){
 		
 	});
 }
+function map1(){
+	
+var locations=new Array();
+var totalCount=$("#total").val();
+for(var i=0;i<totalCount;i++ ){
+	var splitlocations=$(".subselStore").eq(i).val().split(",");
+	locations[i]=new Array(splitlocations.length);
+	for(var j=0;j<splitlocations.length;j++){
+		locations[i][j]=splitlocations[j];	
+		}
+	}
 
+var map = new google.maps.Map(document.getElementById('storeMap1'), {
+      zoom: 7,
+      center: new google.maps.LatLng(36.626457, 127.493725),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+    for (i = 0; i < locations.length; i++) {  
+      marker = new google.maps.Marker({
+        id:i,
+        position: new google.maps.LatLng(locations[i][2], locations[i][3]),
+        map: map,
+        name:locations[i][1],
+      	title:locations[i][1],
+      });
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i][1]+"<hr>"+locations[i][4]+"<br>"+locations[i][5]);
+          infowindow.open(map, marker);
+          //map2(this.name);
+          ajax1(locations[i][0]);
+        }
+       
+       
+      })(marker, i));
+      if(marker)
+      {
+        marker.addListener('click', function() {
+          map.setZoom(18);
+          map.setCenter(this.getPosition());
+        });
+        }
+    }
+}
+
+function map2(x,y,storName,addr1,phone1){
+	var myLatlng = new google.maps.LatLng(); // 위치값 위도 경도
+	var Y_point = x; // Y 좌표
+	var X_point = y; // X 좌표
+
+	var zoomLevel=18; // 지도의 확대 레벨 : 숫자가 클수록 확대정도가 큼
+	var markerTitle=storeName; // 현재 위치 마커에 마우스를 오버을때 나타나는 정보
+	var markerMaxWidth=500; // 마커를 클릭했을때 나타나는 말풍선의 최대 크기
+	
+	var contentString=storeName+"<hr>"+addr1+"<br>"+phone1;
+
+	var myLatlng = new google.maps.LatLng(Y_point, X_point);
+	var mapOptions = {
+		zoom : zoomLevel,
+		center : myLatlng,
+		mapTypeId : google.maps.MapTypeId.ROADMAP
+	}
+	var map = new google.maps.Map(document.getElementById('storeMap1'), mapOptions);
+	var marker = new google.maps.Marker({
+		position : myLatlng,
+		map : map,
+		title : markerTitle
+	});
+	var infowindow = new google.maps.InfoWindow({
+		maxWizzzdth : markerMaxWidth
+	});
+	google.maps.event.addListener(marker, 'click', function() {
+		infowindow.setContent(contentString);
+		infowindow.open(map, marker);
+	});
+};
+
+function map3(){
+	var locations=new Array();
+	var totalCount=$("#total").val();
+	if(totalCount==0)
+		{
+		alert("검색결과가 없습니다.");
+		location.href="storelist.do"
+		}
+	for(var i=0;i<totalCount;i++ ){
+		var splitlocations=$(".subselStore1").eq(i).val().split(",");
+		locations[i]=new Array(splitlocations.length);
+		for(var j=0;j<splitlocations.length;j++){
+			locations[i][j]=splitlocations[j];	
+			}
+		}
+
+	var map = new google.maps.Map(document.getElementById('storeMap1'), {
+	      zoom: 7,
+	      center: new google.maps.LatLng(36.626457, 127.493725),
+	      mapTypeId: google.maps.MapTypeId.ROADMAP
+	    });
+
+	    var infowindow = new google.maps.InfoWindow();
+
+	    var marker, i;
+	    for (i = 0; i < locations.length; i++) {  
+	      marker = new google.maps.Marker({
+	        id:i,
+	        position: new google.maps.LatLng(locations[i][2], locations[i][3]),
+	        map: map,
+	        animation: google.maps.Animation.DROP,
+	        name:locations[i][1],
+	      	title:locations[i][1],
+	      });
+
+	      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+	        return function() {
+	          infowindow.setContent(locations[i][1]+"<hr>"+locations[i][4]+"<br>"+locations[i][5]);
+	          infowindow.open(map, marker);
+	          //map2(this.name);
+	          ajax1(locations[i][0]);
+	        }
+	       
+	       
+	      })(marker, i));
+	      if(marker)
+	      {
+	        marker.addListener('click', function() {
+	          map.setZoom(18);
+	          map.setCenter(this.getPosition());
+	        });
+	        }
+	    }
+	}
 
