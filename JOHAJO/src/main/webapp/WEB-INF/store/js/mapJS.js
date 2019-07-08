@@ -26,7 +26,7 @@ function ajax1(idx){
 					str+="편의시설:";
 					for(var i in serviceArray)
 					str+="<span class='infoService'><img src='image/"+serviceArray[i]+".PNG' style='width:40px;'>"+serviceArray[i]+"</span>";
-					str+="<a href='gores.do?idx="+idx+"'>예약하기</a>"
+					str+="<br><a href='gores.do?idx="+idx+"'>예약하기</a>"
 					str+="</div>";
 					
 				});
@@ -67,7 +67,7 @@ function ajax2(idx){
 					str+="편의시설:";
 					for(var i in serviceArray)
 					str+="<span class='infoService'><img src='image/"+serviceArray[i]+".PNG' style='width:40px;'>"+serviceArray[i]+"</span>";
-					str+="<a href='gores.do?idx="+idx+"'>예약하기</a>"
+					str+="<br><a href='gores.do?idx="+idx+"'>예약하기</a>"
 					str+="</div>";
 				});
 			x=xpoint;
