@@ -9,9 +9,124 @@
 <title>Insert title here</title>
 <script type="text/javascript">
    $(function(){
-	 console.log("aa");
-	 var hfoodname="";
-	 var hprice=0;
+	   
+		function calender(num){
+   		
+   		$.ajax({
+   			
+            type:'get',
+            url:'reslist2.do',
+            data:{"month":num},
+            success:function(redata){
+            	var str="";
+       	   		var str2="";
+            	var cday="";
+            $(redata).find("calendar").each(function(){
+            	var s=$(this);
+            	week=s.find("week").text();
+            	currentyear=s.find("currentyear").text();
+            	currentyear1=parseInt(currentyear);
+            	lastday=s.find("lastday").text();
+            	lastmonth=s.find("lastmonth").text();
+            	var lastmonth1=parseInt(lastmonth);
+            	lastmday=s.find("lastmday").text();
+            	var lastmday1=parseInt(lastmday);
+            	currentMonth=s.find("currentMonth").text();
+            	currentMonth1=parseInt(currentMonth);
+            	lastday1=0;
+            	week1=0;
+            	lastday1=parseInt(lastday);
+            	week1=parseInt(week)-1;
+            	month=s.find("month").text();
+            	month1=parseInt(month);
+            	year=s.find("year").text();
+            	year1=parseInt(year);
+            	today=s.find("today").text();
+            	console.log(lastday1);
+            	console.log(week1);
+            	console.log(month1);
+            	var s1=month1+1;
+               	var s2=month1-1;
+            	//var lo2='onclick="calender('+s1+')"';
+            	//console.log(lo2);
+            	//var lo3='onclick="calender('+s2+')"';
+            	//console.log(lo3);
+            		str2+="<ul>";
+            		console.log("현재"+currentMonth1);
+            		console.log("처음달"+month1);
+            	if(currentyear1==year1){
+            		if(currentMonth1<month1){
+            		str2+="<li class='prev' month="+s2+">&#10094;</li>";
+            		}
+            	}else{
+            		str2+="<li class='prev' month="+s2+">&#10094;</li>";
+            	}
+				str2+="<li>";
+				
+				
+				if(month1<lastmonth){
+					str2+="<li><a class='next' month="+s1+">&#10095;</a></li>";
+					
+				}
+				str2+="<li><span style='font-size: 18px'>"+year+"년<br>"+month+"월</span></li>";
+            	
+            	for(i=0;i<week1;i++){
+   					str+="<li></li>";
+            	}
+            	today1=parseInt(today);
+            	for(j=1;j<=lastday1;j++){
+            		
+            		if(month1==currentMonth1){
+                		if(today1>j){
+                			//console.log("여기들어옴1")
+                			str+="<li class='nday' month='"+month+"'>"+j+"</li>";
+                		}else{
+                			//console.log("여기들어옴2")
+                			str+="<li class='day' month='"+month+"'>"+j+"</li>";
+                		}
+            		}else if(month1==lastmonth1){
+            			if(today1<j){
+            				str+="<li class='nday' month='"+month+"'>"+j+"</li>";
+            			}else{
+            				str+="<li class='day' month='"+month+"'>"+j+"</li>";
+            			}
+            		}else{
+            			str+="<li class='day' month='"+month+"'>"+j+"</li>";
+            		}
+            	}
+            	str+="</ul>";
+        		str+="</li>";
+        		console.log(str2);
+   				console.log(str);
+            });
+            
+            $("div.month").html(str2);
+     		$("ul.days").html(str);
+		},error : function( jqXHR, textStatus, errorThrown ) {
+
+        	alert( jqXHR.status );
+
+  
+        }
+   		});
+	 }
+		now=new Date();
+		var mon=now.getMonth()
+		calender(mon);
+	$(document).on('click','.next',function() { 
+		var s=0;
+		s=$(this).attr("month");
+		s1=s-1;
+		console.log(s1);
+		calender(s1);
+	});
+	$(document).on('click','.prev',function() { 
+		var s=0;
+		s=$(this).attr("month");
+		s1=s-1;
+		console.log(s1);
+		calender(s1);
+	});
      $("span.selClass").click(function(){
         var a=$(this).attr('sel');
         $("sit").val(a);
@@ -20,8 +135,9 @@
         $(".selsit").css("display","none");
         $(".selmenu").css("display","block");
         $("b.seleted").html(a);
+        $(".hsit").val(a);
      });
-     $("li.day").click(function(){
+     $(document).on('click','li.day',function() { 
   	   var m=$(this).attr("month");
   	   var d=$(this).text();
   	   var s=m+"/"+d;
@@ -47,26 +163,31 @@
        $(".selmenu").css("display","none");
    	   //console.log(n+t);
      });
-     $(document).on('click','Button.btnadd',function() { 
-     
-    	 console.log("aaa");
-    	 var f=$(this).attr("fname");
-     	 var p=$(this).attr("price");
-     	 console.log(f+"  "+p);
-     	 this.hfoodname+=f;
-     	 this.fprice+=p;
-     });
-     
-     $(document).on('click','Button.btnend',function() {  	 
-     	 $(".hfname").val(this.hfoodname);
-     	 $(".hprice").val(this.fprice);
-     	$(".selmenu").css("display","none");
+    /*  $(document).on('click','Button.btnadd',function() { 
+     	 f1=$(".hfname").val();
+     	 p1=$(".hprice").val();
+    	 if(f1!=""){
+    		 f1+=",";
+    	 }
+    	 if(p1!=""){
+    		 p1+=",";
+    	 }
+    	 f1+=$(this).attr("fname");
+     	 p1+=$(this).attr("price");
+     	 $(".hfname").val(f1);
+    	 $(".hprice").val(p1);
+     	 console.log(f1+"  "+p1);
+     }); */
+     $(document).on('click','Button.btndel',function() { 
+    	 f1=$(".hfname").val();
+     	 p1=$(".hprice").val();
+     	 f1.split(",")
      });
     
-     $(".sidebar-nav a").click(function(){
-
-     	
+     $(".sidebar2 a").click(function(){
+    	 
          var str="";
+         
          var num=$(this).attr("name");
          //console.log("ajax"+num);
          $.ajax({
@@ -82,7 +203,6 @@
                      imgname=s.find("imgname").text();
                     
                      calorie=s.find("calorie").text();
-                     count=s.find("count").text();
                      price=s.find("price").text();
                      
                      
@@ -91,8 +211,7 @@
                      str+="<td>fname:"+fname+"<br>";
                      str+="calorie:"+calorie+"<br>";
                      str+="price:"+price+"<br></td>";
-                     str+="<td><button type='button' class='btnadd' fname='"+fname+"' price='"+price+"'>+</button></td>";
-                   
+                     str+="<td><button type='button' class='btnadd' fname='"+fname+"' price='"+price+"' idx='"+idx+"'>+</button></td>";
                      str+="</tr></table>"
                      /* 
                      str+="idx:"+idx+"&nbsp";
@@ -104,7 +223,7 @@
                      str+="<br>"; */
                      
                   });
-                  str+="<button type='button' class='btnend'>선택완료</button>";
+            	
                   $("span#datatest123").html(str);
                   
                   
@@ -113,8 +232,123 @@
             }
          });
      });
-     
+     $(document).on('click','Button.btnadd',function() { 
+    	 //$(this).css("display","none");
+    	 console.log(3);
+    	 var str="";
+         var num=$(this).attr("idx");
+         var name=$(this).attr("fname");
+         //var count=$("b.con").attr("count");
+         var i=0;
+         
+         //console.log("ajax"+num);
+         $.ajax({
+            type:'get',
+            url:'resAppetizer2.do',
+            data:{"idx":num,"name":name},
+            success:function(redata){
+            	     
+            	     //console.log("count: "+count);
+            		$(redata).find("data").each(function(){
+                     var s=$(this);
+                     idx=s.find("idx").text();
+                     fname=s.find("fname").text();
+                     imgname=s.find("imgname").text();
+                     calorie=s.find("calorie").text();
+                     price=s.find("price").text();
+                     
+                     
+                     str+="<table><tr class='food' fname="+idx+">";
+                     str+="<td>fname:"+fname+"<br>";
+                     str+="calorie:"+calorie+"<br>";
+                     str+="price:"+price+"<br></td>";
+                     str+="<td><button type='button' class='btndel' fname='"+fname+"' price='"+price+"' idx='"+i+"'>-</button></td>";
+                     //str+="<td>수량 :<b class='con' count=${count}>${count}</b></td>";
+                     str+="</tr></table>"
+                   	 i++;
+                     
+                  });
+                  str+="<button type='button' class='btnend'>선택완료</button>";
+                  $("div.seleted").html(str);
+                  
+                  
+            },error:function(){
+            alert("error");
+            }
+         });
+     });
+     $(document).on('click','Button.btndel',function() { 
+    	 
+    	 var str="";
+         var num=$(this).attr("idx");
+         var i=0;
+         console.log("ajax"+num);
+         $.ajax({
+            type:'get',
+            url:'resAppetizer3.do',
+            data:{"idx":num},
+            success:function(redata){
+            	
+            	 $(redata).find("data").each(function(){
+                     var s=$(this);
+                     idx=s.find("idx").text();
+                     fname=s.find("fname").text();
+                     imgname=s.find("imgname").text();
+                     calorie=s.find("calorie").text();
+                     price=s.find("price").text();
+                     
+                     
+                     str+="<table><tr class='food' fname="+idx+">";
+                     str+="<td>fname:"+fname+"<br>";
+                     str+="calorie:"+calorie+"<br>";
+                     str+="price:"+price+"<br></td>";
+                     str+="<td><button type='button' class='btndel' fname='"+fname+"' price='"+price+"' idx='"+i+"'>-</button></td>";
+                     str+="</tr></table>"
+                   	 i++;
+                     
+                  });
+            	
+            	 str+="<button type='button' class='btnend'>선택완료</button>";
+                  $("div.seleted").html(str);
+                  
+                  
+            },error : function( jqXHR, textStatus, errorThrown ) {
+
+            	alert( jqXHR.status );
+
+      
+            }
+         });
+     });
+     $(document).on('click','Button.btnend',function() { 
+    	 $.ajax({
+             type:'get',
+             url:'resAppetizer4.do',
+             success:function(redata){
+             	var n="";
+             	var p=0;
+             	 $(redata).find("data").each(function(){
+                      var s=$(this);
+                      fname=s.find("fname").text();
+                      price=parseInt(s.find("price").text());
+                      p+=price;
+                      n+=(n.length==0?"":",")+fname;
+             	 });
+             	 console.log(p);
+             	 console.log(n);
+             	$(".hprice").val(p);
+                $(".hfname").val(n);
+                str="";
+                $("div.seleted").html(str);
+                $(".selmenu").css("display","none");
+             },error : function( jqXHR, textStatus, errorThrown ) {
+
+             	alert( jqXHR.status );
+             }
+     });
    });
+     
+});
 </script>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
 <script src="//code.jquery.com/jquery.min.js"></script>
@@ -124,48 +358,31 @@
 <body>
 
 <div id="reserv_menu">
-   <form action="res.do">
+   <form action="resAppetizer5.do">
       <ul>
             <li><span onclick="selday()">날짜선택<b class="seday"></b></span>
                <ul>
                   <li>
                      <div class="cal">
-                        <ul>
-                           <li>
-                              <div class='month'>
-                                 <ul>
-                                    <li class='prev' onclick="location.href='reslist3.do'">&#10094;</li>
-                                    <li>
-                                    <li><a href="reslist2.do" class="next">></a></li>
-                                    <li><span style='font-size: 18px'>${year }년<br>${month }월</span></li>
-                                 </ul>
-                              </div>
+								<ul>
+									<li>
+										<div class='month'>
+											
+										</div>
 
-                              <ul class='weekdays'>
-                                 <li>일</li>
-                                 <li>월</li>
-                                 <li>화</li>
-                                 <li>수</li>
-                                 <li>목</li>
-                                 <li>금</li>
-                                 <li>토</li>
-                              </ul>
-                              <ul class='days'>
-                                 <c:forEach begin="1" end='${week-1}'>
-                                    <li></li>
-                                 </c:forEach>
-                                 <c:forEach var='i' begin='1' end='${today-1 }' varStatus="n">
-                                    <li ${currentMonth<month?"class='day'":"class='nday'"} month="${month }">${i }</li>
-                                 </c:forEach>
-                                 <c:forEach var='i' begin='${today}' end='${lastday}' varStatus="n">
-                                    <li ${currentMonth<=month?"class='day'":"class='nday'"} month="${month }" >${i }</li>
-                                 </c:forEach>
-                              </ul>
-                           </li>
-                        </ul>
-						
-                     </div>
-                  </li>
+										<ul class='weekdays'>
+											<li>일</li>
+											<li>월</li>
+											<li>화</li>
+											<li>수</li>
+											<li>목</li>
+											<li>금</li>
+											<li>토</li>
+										</ul>
+										<ul class='days'>
+										
+							</div>
+						</li>
                </ul></li>
 
 				<li><span onclick="store()">매장선택<b class="selStore"></b></span>
@@ -184,7 +401,7 @@
 											<td><a class="storeName">${i.name }</a></td>
 											<td><a class='selTime' time='17:00' store="${i.name}">17:00</a>&nbsp;&nbsp;
 												<a class='selTime' time='18:00' store="${i.name}">18:00</a>&nbsp;&nbsp;
-												<a class='selTime' time='19:00' store="${i.name}"> 19:00</a>&nbsp;&nbsp; 
+												<a class='selTime' time='19:00' store="${i.name}">19:00</a>&nbsp;&nbsp; 
 												<a class='selTime' time='20:00' store="${i.name}">20:00</a>
 											</td>
 											
@@ -195,7 +412,7 @@
 							</div>
 						</li>
 					</ul></li>
-				<li><span onclick="sel()">자리선택 <b class="seleted"></b></span>
+				<li><span onclick="selectsit()">자리선택 <b class="seleted"></b></span>
                <div class="selsit">
                   <c:set var="it">A,B,C,D,E</c:set>
                   <c:forEach var="key" items="${it }">
@@ -208,12 +425,12 @@
                </div></li>
 
             <li><span onclick="menu()">메뉴선택</span>
-               <div class="selmenu">
-                  <div id="page-wrapper">
+               <div class="selmenu" >
+                  <div id="sidebar">
                      <!-- 사이드바 -->
-                     <div id="sidebar-wrapper">
-                        <ul class="sidebar-nav">
-                           <li class="sidebar-brand">course</li>
+                     <div id="sidebar1">
+                        <ul class="sidebar2">
+                           <li class="sidebar3">course</li>
                            <li><a href="#">HotMenu</a></li>
                            <li><a name="1">Appetizer</a></li>
                            <li><a name="2">Soup</a></li>
@@ -228,24 +445,25 @@
                      <!-- 본문 -->
                      <div id="page-content-wrapper">
                         <div class="container-fluid">
-                           <h1>간단한 사이드바</h1>
-                           <p>메뉴가 많아서 한 페이지를 넘으면 세로 스크롤바 생김</p>
                           <span id="datatest123"></span>
                         </div>
                      </div>
-                     <!-- /본문 -->
+                     
                   </div>
+                 
                </div></li>
+               <div><h2>선택한 메뉴</h2><br><div class="seleted"></div></div>
+               
          </ul>
-         <input type='text' readonly="readonly" class='hmonth' value=''>
-         <input type='text' readonly="readonly" class='hday' value=''>
-         <input type='text' readonly="readonly" class='hstore' value=''>
-         <input type='text' readonly="readonly" class='htime' value=''>
-         <input type='text' readonly="readonly" class='hsit' value=''>
-         <input type='text' readonly="readonly" class='hfname' value=''>
-         <input type='text' readonly="readonly" class='hprice' value=''>
-         <input type='text' readonly="readonly" class='hmenu' value=''>
-         <input type="button" value="예약">
+         <input type='hidden' class='hmonth' name='hmonth' value=''>
+         <input type='hidden' class='hday' name='hday' value=''>
+         <input type='hidden' class='hstore' name='hstore' value=''>
+         <input type='hidden' class='htime' name='htime' value=''>
+         <input type='hidden' class='hsit' name='hsit' value=''>
+         <input type='hidden' class='hfname' name='hfname' value=''>
+         <input type='hidden' class='hprice' name='hprice' value=''>
+         <input type='hidden' class='hcourse' name='hcourse' value=''>
+         <input type="submit" value="예약">
          <input type="button" value="취소">
       </form>
    </div>
@@ -259,22 +477,24 @@
    }
    function store(){
  
+      $(".cal").css("display","none");
       $(".store").css("display","block");
       $(".selsit").css("display","none");
-      $(".cal").css("display","none");
       $(".selmenu").css("display","none");
    }
-   function sel(){
-      $(".sitback").css("display","block");
-      $(".store").css("display","none");
+   function selectsit(){
+	   console.log("1");
       $(".cal").css("display","none");
+      $(".store").css("display","none");
+      $(".selsit").css("display","block");
       $(".selmenu").css("display","none");
    }
    function menu(){
-	   $(".selmenu").css("display","block");
-	   $(".store").css("display","block");
-	   $(".store").css("display","none");
-	   $(".cal").css("display","none");
+      $(".cal").css("display","none");
+      $(".store").css("display","none");
+      $(".selsit").css("display","none");
+      $(".selmenu").css("display","block");
    }
+  
 </script>
 </html>
