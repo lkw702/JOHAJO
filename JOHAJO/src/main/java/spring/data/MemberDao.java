@@ -33,4 +33,21 @@ public class MemberDao  extends SqlSessionDaoSupport{
 		// TODO Auto-generated method stub
 		return getSqlSession().selectOne("selectUserPw",map);
 	}
+
+	public MemberDto userInfoByPass(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectOne("userInfoByPass",map);
+	}
+
+	public int getUserCheckCount(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectOne("userCheckCount",map);
+	}
+
+	public void memberUpdate(MemberDto dto) {
+		getSqlSession().update("userinfoUpdate",dto);
+	}
+
+
+
 }

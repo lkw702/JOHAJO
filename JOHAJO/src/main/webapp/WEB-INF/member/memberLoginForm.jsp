@@ -78,13 +78,17 @@
 </script>
 </head>
 <body>
-<%-- <c:set var="log2" value="${log}"/>
-<c:if test="${log2 =='false'}">
+<%-- <c:out value="${log_res}" /> --%>
+<c:if test="${log_res =='false'}">
 <script type="text/javascript">
 	alert("아이디아 비밀번호를 정확히 입력해주세요");
 </script>
-<c:remove var="log2"/>
-</c:if> --%>
+</c:if>
+<%
+	session.removeAttribute("log_res");
+%>
+
+
 <c:if test="${saveok == 'no'}">
 <c:set var="isSave" value="false"/>
 </c:if>

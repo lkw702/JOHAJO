@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>     
-<%@ page session="true" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,15 +15,6 @@
 
 </head>
 <body>
-   <h2>Session 사용</h2><br>
-	
-	saveok :<c:out value="${saveok}" /><br>
-	log_idx : <c:out value="${log_idx}" /><br>
-	log_id <c:out value="${log_id}" /><br>
-	log_namme <c:out value="${log_name}" /><br>
-	loginok <c:out value="${loginok}" /><br>
-	
-	<button type="button" onclick="location.href='userLogout.do'">${log_name} 님 로그아웃하기</button>
-	
+    Q&A 리스트
 </body>
 </html>

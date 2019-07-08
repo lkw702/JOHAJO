@@ -1,9 +1,12 @@
 package spring.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import spring.data.MemberDto;
 import spring.service.MemberService;
+
+
 
 @Controller
 public class MemberController {
@@ -100,19 +105,17 @@ public class MemberController {
 			}else {
 				session.setAttribute("saveok","yes"); 
 			}
-			// session.setAttribute("saveok",chkid=="no"?"no":"yes"); //아이디저장
-			 session.setAttribute("idok", dto.getId()); //로그인 아이디
-			 session.setAttribute("loginok", "yes");//로그인 여부
-			 session.setAttribute("userLogin", dto);//로그인 여부
+			session.setAttribute("log_idx", dto.getIdx()); 
+			session.setAttribute("log_id", dto.getId()); //로그인 아이디
+			session.setAttribute("log_name", dto.getName());
+			session.setAttribute("loginok", "yes");//로그인 여부
+			session.setMaxInactiveInterval(60*60*8);
 			 
-			 session.setMaxInactiveInterval(60*60*8);
+			return "/member/memberLoginOk";
 			 
-			 return "/member/memberLoginOk";
-			 
-		
 		}else{
 			
-			model.addAttribute("log","false");
+			session.setAttribute("log_res","false");
 			return "redirect:loginform.do";
 		}
 		
@@ -129,9 +132,8 @@ public class MemberController {
 	
 	//로그인
 	@RequestMapping("/loginform.do")
-	public String login(Model model, @RequestParam(value="log",defaultValue="") String log )
+	public String login()
 	{
-		model.addAttribute("log",log);
 		return "/member/memberLoginForm";
 	}
 	
@@ -232,8 +234,100 @@ public class MemberController {
 	@RequestMapping("/mypageform.do")
 	public String myPageForm() {
 		
-		return "/member/myPageForm";
+		return "/member/mypageMain";
 	}
 	
+	@RequestMapping("/mypassfrom.do")
+	public String mypassform(){
+		
+		return "/member/mypassForm";	
+	}
+	
+	@RequestMapping(value="/myinfoform.do",method = {RequestMethod.GET, RequestMethod.POST})
+	public String myinfoform(@RequestParam String password,
+			@RequestParam String idx,
+			Model model,HttpSession session) {
+		
+		Map<String, String> map = new HashMap<String, String>(); 
+		map.put("idx", idx);
+		map.put("password", password);
+		int cnt = service.getUserCheckCount(map);
+		
+		if(cnt == 1) {
+			MemberDto dto = service.getUserInfoByPass(map);
+			
+			String[] res = dto.getHp().split("-");
+			
+			dto.setHp1(res[0]);
+			dto.setHp2(res[1]);
+			dto.setHp3(res[2]);
+			
+			model.addAttribute("dto",dto);
+			
+			return "/member/myUpdateForm";
+			
+		} else {
+			session.setAttribute("log_res","false");
+			return "redirect:mypassfrom.do";
+		
+		}
+	}
+	
+	//update
+	@RequestMapping(value="memberUpdate.do", method=RequestMethod.POST)
+	public String memberUpdate(
+			@ModelAttribute MemberDto dto,
+			Model model,
+			HttpServletRequest request,
+			HttpSession session,
+			HttpServletResponse response,
+			@RequestParam String newpass) {
+		
+		Map<String, String> map = new HashMap<String, String>(); 
+		String nowpass = dto.getPassword();
+		map.put("idx", String.valueOf(dto.getIdx()));
+		map.put("password", nowpass);
+		
+		int cnt = service.getUserCheckCount(map);
+		if(cnt == 1) {
+			if(newpass.length() > 0) {
+				//System.out.println("새비번 사용한다"+newpass.length());
+				dto.setPassword(newpass);
+			}else {
+				//System.out.println("기존 비번 사용한다.");
+				dto.setPassword(nowpass);
+			}
+			
+			
+			dto.setHp(dto.getHp1()+"-"+dto.getHp2()+"-"+dto.getHp3());
+			service.memberUpdate(dto);
+			session.setAttribute("mupdate","true");
+			return  "/member/mypageMain";
+		}else {
+			
+			try {
+				response.setContentType("text/html;charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('기존 비밀번호가 다릅니다.정확히 입력해주세요');");
+				out.println("history.go(-1);");
+				out.println("</script>");
+				out.close();
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
+	}
+	@RequestMapping("myqnaList.do")
+	public String myqnaList() {
+		return "/member/myqnaList";
+	}
+	
+	
+		
 	
 }

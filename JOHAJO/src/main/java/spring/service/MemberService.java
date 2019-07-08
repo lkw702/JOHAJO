@@ -37,5 +37,21 @@ public class MemberService {
 		return dao.selectUserPw(map);
 	}
 
+	
+
+	public MemberDto getUserInfoByPass(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return dao.userInfoByPass(map);
+	}
+
+	public int getUserCheckCount(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return dao.getUserCheckCount(map);
+	}
+
+	public void memberUpdate(MemberDto dto) {
+		dao.memberUpdate(dto);
+	}
+
 
 }

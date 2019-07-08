@@ -164,7 +164,7 @@ function joinCheck(){
 				<li>
 					<span>아이디</span> 
 					<input type="text" name="id" class="id" readonly="readonly" required="required">
-					<button type="button"  onclick="javascriprt:idch();" required="required">아이디체크</button>
+					<button type="button"  onclick="javascriprt:idch();" required="required">아이디입력</button>
 				</li>
 				<li>
 					<span>비밀번호 </span>

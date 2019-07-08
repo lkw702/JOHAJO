@@ -29,5 +29,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from member where id=#{id} and hp=#{hp}
 	</select>
 	
+	<select id="userInfoByPass"  parameterType="HashMap" resultType="mdto">
+		select * from member where idx=#{idx} and password=#{password}
+	</select>
+	
+	<select id="userCheckCount"  parameterType="HashMap" resultType="int">
+		select count(*) from member where idx=#{idx} and password=#{password}
+	</select>
+	
+	<update id="userinfoUpdate" parameterType="mdto">
+		update member set password=#{password}, name=#{name}, hp=#{hp},
+		email=#{email}, gender=#{gender}, birth=#{birth}
+		where idx=#{idx}
+	</update>
+	
 	
 </mapper>
