@@ -111,7 +111,12 @@ public class MemberController {
 			session.setAttribute("loginok", "yes");//로그인 여부
 			session.setMaxInactiveInterval(60*60*8);
 			 
-			return "/member/memberLoginOk";
+			if(id.equals("manager")){
+				return "/admin/ad_MainForm";
+			}else {
+				return "/member/memberLoginOk";
+			}
+			
 			 
 		}else{
 			
@@ -322,12 +327,6 @@ public class MemberController {
 		}
 		
 	}
-	@RequestMapping("myqnaList.do")
-	public String myqnaList() {
-		return "/member/myqnaList";
-	}
 	
-	
-		
 	
 }
