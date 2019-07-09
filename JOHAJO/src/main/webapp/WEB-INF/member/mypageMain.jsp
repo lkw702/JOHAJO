@@ -41,8 +41,6 @@
 		width:300px;
 		text-align: center;
 		font-size: 20px;
-		
-			
 	}
 	
 	div.field.f1 p{

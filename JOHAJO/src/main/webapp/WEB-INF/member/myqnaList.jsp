@@ -16,5 +16,16 @@
 </head>
 <body>
     Q&A 리스트
+    총: <c:out value="${totalCount}" />
+    <div>
+    <c:forEach var="dto" items="${list}">
+    	<ul>
+    		<li>답변미등록 </li>
+    		<li>문의제목</li>
+    		<li>문의카테고리</li>
+    		<li>문의내용</li>
+    	</ul>
+    </c:forEach>
+    </div>
 </body>
 </html>
