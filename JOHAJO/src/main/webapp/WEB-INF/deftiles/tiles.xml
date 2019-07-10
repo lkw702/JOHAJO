@@ -18,7 +18,20 @@
 	 <definition name="popup-tiles" template="/WEB-INF/layout/popup.jsp">
 	  <put-attribute name="popup"   value="" />
 	 </definition>
+	 
+	 <!--popup-tiles 추가  -->
+	 <definition name="adpopup-tiles" template="/WEB-INF/admin/layout/ad_popup.jsp">
+	  <put-attribute name="adpopup"   value="" />
+	 </definition>
  
+ 	<!-- admin tiles 추가 -->
+ 	<definition name="admainLayout" template="/WEB-INF/admin/layout/ad_layout.jsp">
+		<put-attribute name="adtop" value="/WEB-INF/admin/layout/ad_top.jsp"/>
+		<put-attribute name="admain" value="/WEB-INF/admin/layout/ad_main.jsp"/>
+	</definition>
+	<definition name="admain.tiles" extends="admainLayout">
+		<put-attribute name="admain" value="/WEB-INF/admin/layout/ad_main.jsp"/>
+	</definition>
  
 	
 <!-- macro -->
@@ -32,8 +45,19 @@
 	<definition name="/pop/*/*" extends="popup-tiles">
 	  <put-attribute name="popup"   value="/WEB-INF/{1}/{2}.jsp" />
 	 </definition>
-	
+	 
+	 
+	 
+	<!-- admin tiles 추가 -->
+	<definition name="/ad/*/*" extends="admainLayout">
+		<put-attribute name="admain" value="/WEB-INF/admin/{1}/{2}.jsp"/>
+	</definition>	
 
+	<definition name="/ad/pop/*/*" extends="adpopup-tiles">
+	  <put-attribute name="adpopup"   value="/WEB-INF/admin/{1}/{2}.jsp" />
+	 </definition>
+	 
+	 
 </tiles-definitions>  
 
 

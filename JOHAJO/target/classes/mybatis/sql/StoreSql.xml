@@ -25,4 +25,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="storeSearchCount" resultType="int" parameterType="String">
 		select count(*) from store where name like '%'||#{name}||'%'
 	</select>
+	<insert id="storeInsert" parameterType="sdto">
+		insert into store values(seq_store.nextval,#{name},#{ohours},#{phone},#{service},
+		#{xpoint},#{ypoint},#{addr})
+	</insert>
+	<update id="storeUpData" parameterType="sdto">
+		update store set name=#{name},ohours=#{ohours},phone=#{phone},service=#{service},
+		xpoint=#{xpoint},ypoint=#{ypoint},addr=#{addr} where idx=#{idx}
+	</update>
+	<delete id="storeDelete" parameterType="int">
+		delete from store where idx=#{idx}
+	</delete>
 </mapper>

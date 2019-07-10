@@ -9,6 +9,7 @@
 			<idx>${sdto.idx}</idx>
 			<name>${sdto.name}</name>
 			<phone>${sdto.phone}</phone>
+			<ohours>${sdto.ohours}</ohours>
 			<service>${sdto.service}</service>
 			<xpoint>${sdto.xpoint}</xpoint>
 			<ypoint>${sdto.ypoint}</ypoint>

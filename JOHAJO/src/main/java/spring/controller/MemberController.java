@@ -111,7 +111,12 @@ public class MemberController {
 			session.setAttribute("loginok", "yes");//로그인 여부
 			session.setMaxInactiveInterval(60*60*8);
 			 
-			return "/member/memberLoginOk";
+			
+			   if(id.equals("manager")) {
+		            return "redirect:admain.do";
+		         }else {
+		            return "/member/memberLoginOk";
+		         }
 			 
 		}else{
 			
