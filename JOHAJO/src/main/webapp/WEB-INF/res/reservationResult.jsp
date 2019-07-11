@@ -15,6 +15,7 @@ $(function(){
 	var fname=$(".hfname").val();
 	var price=$(".hprice").val();
 	var course=$(".hcourse").val();
+	var sid=$(".session_id").val();
 	fname.split(",");
 	
 	var str1="";
@@ -31,22 +32,35 @@ $(function(){
 		str1+="<tr><th>코스</th><th>"+course+"</th></tr>";
 	}
 	str1+="</table>";
+	if(sid!=null){
+		str1+="포인트 사용 <input type='text' size=5 class='point'><b>사용가능 포인트 : ${point}<b><Button type='button' class='usepoint'>포인트사용</button>";
+	}
 	$(".out1").html(str1);
+
+
+	$(document).on('click','Button.usepoint',function() { 
+		var use=$(".point").val();
+		var p=price-use;
+		var str="<b>총 결제금액은"+p+"원 입니다</b>";
+		$("div.out2").html(str);
+	});
 });
 </script>
 </head>
 <body>
 <h1>예약</h1>
-<input type="text" value="${hmonth }" class="hmonth">
-<input type="text" value="${hday }" class="hday">
-<input type="text" value="${hstore }" class="hstore">
-<input type="text" value="${htime }" class="htime">
-<input type="text" value="${hsit }" class="hsit">
-<input type="text" value="${hfname }" class="hfname">
-<input type="text" value="${hprice }" class="hprice">
-<input type="text" value="${hcourse }" class="hcourse">
-<div class="out1"></div>
+<input type="hidden" value="${hmonth }" class="hmonth">
+<input type="hidden" value="${hday }" class="hday">
+<input type="hidden" value="${hstore }" class="hstore">
+<input type="hidden" value="${htime }" class="htime">
+<input type="hidden" value="${hsit }" class="hsit">
+<input type="hidden" value="${hfname }" class="hfname">
+<input type="hidden" value="${hprice }" class="hprice">
+<input type="hidden" value="${hcourse }" class="hcourse">
+<input type="hidden" value="${session_id }" class="session_id">
 
+<div class="out1"></div>
+<div class="out2"></div>
 
 </body>
 </html>
