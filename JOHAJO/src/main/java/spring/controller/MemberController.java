@@ -294,21 +294,33 @@ public class MemberController {
 		
 		int cnt = service.getUserCheckCount(map);
 		if(cnt == 1) {
+			dto.setHp(dto.getHp1()+"-"+dto.getHp2()+"-"+dto.getHp3());
+			
 			if(newpass.length() > 0) {
 				//System.out.println("새비번 사용한다"+newpass.length());
 				dto.setPassword(newpass);
+				service.memberUpdate(dto);
+				
+				session.setAttribute("mupdate","true");
+				session.removeAttribute("loginok");
+				session.removeAttribute("log_idx");
+				session.removeAttribute("log_name");
+				session.removeAttribute("log_id");
+				
+				return  "redirect:loginform.do";
+				
 			}else {
 				//System.out.println("기존 비번 사용한다.");
 				dto.setPassword(nowpass);
+				service.memberUpdate(dto);
+				session.setAttribute("mupdate","true");
+				return  "/member/mypageMain";
 			}
 			
 			
-			dto.setHp(dto.getHp1()+"-"+dto.getHp2()+"-"+dto.getHp3());
-			service.memberUpdate(dto);
-			session.setAttribute("mupdate","true");
-			return  "/member/mypageMain";
-		}else {
 			
+			
+		}else {
 			try {
 				response.setContentType("text/html;charset=utf-8");
 				PrintWriter out = response.getWriter();

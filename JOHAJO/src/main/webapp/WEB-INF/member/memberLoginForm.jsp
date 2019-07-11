@@ -88,7 +88,17 @@
 	session.removeAttribute("log_res");
 %>
 
-
+<c:out value="${mupdate}" />
+<c:if test="${mupdate =='true'}">
+<script type="text/javascript">
+	alert("회원 정보 수정완료하였습니다.다신 로그인해주세요");
+</script>
+</c:if>
+<%
+	session.removeAttribute("mupdate");
+%>
+	
+	
 <c:if test="${saveok == 'no'}">
 <c:set var="isSave" value="false"/>
 </c:if>

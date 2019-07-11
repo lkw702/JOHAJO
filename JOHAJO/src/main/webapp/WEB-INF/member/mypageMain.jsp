@@ -41,8 +41,6 @@
 		width:300px;
 		text-align: center;
 		font-size: 20px;
-		
-			
 	}
 	
 	div.field.f1 p{
@@ -114,7 +112,7 @@
 		<div class="field f2">
 			<ul>
 				<li><a href="mypassfrom.do">회원정보 수정</a></li>
-				<li><a href="myqnaList.do">1:1 문의하기</a></li>
+				<li><a href="myqnaList.do?idx=${log_idx}">1:1 문의하기</a></li>
 				<li><a href="myReservList.do">나의 예약</a></li>
 				<li><a href="myPointList.do">나의 리워즈</a></li>
 			</ul>
