@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qna">
+	<select id="QnaTotalCount" resultType="int">
+		select count(*) from qna
+	</select>
+	<select id="QnaSelectList" parameterType="int" resultType="qdto">
+		select * from qna where mem_f=#{idx} order by idx asc
+	</select>
+	<insert id="QnaDataInsert" parameterType="qdto">
+		insert into qna(idx, anw, selection, title, contents, mem_f, writeday,grp,stp,lv) 
+		values(#{idx},#{anw},#{selection},#{title},#{contents},#{mem_f},
+		sysdate,#{grp},#{stp},#{lv})
+	</insert>
+	
+	<select id="QnaMaxNum" resultType="int">
+		select NVL(max(idx),0)  from qna
+	</select>
+	
+</mapper>
