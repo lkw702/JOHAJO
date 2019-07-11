@@ -31,7 +31,7 @@
 <script type="text/javascript">
 $(function(){
 	$(document).on("click","button.anwInsert", function(){
-		
+		var loc=$(this);
 		var param = $("form[name=answer]").serialize();
 		
 		$.ajax({
@@ -41,24 +41,23 @@ $(function(){
             success:function(data){
 				var str="";
 				$(data).find("data").each(function(){
+					console.log("성공!!!");
 					var s=$(this);
 					idx=s.find("idx").text();
 					anw=s.find("anw").text();
 					con=s.find("con").text();
 					day=s.find("day").text();
 					
-					    str="<div class='qnaok'>";
-						str+="<span>idx : "+idx+"</span><br>";
-						str+="<span>답변완료: "+anw+"</span><br>";
-						str+="<span>내용: "+con+"</span><br>";
-						str+="<span>등록일 : "+day+"</span><br>";
-						str+="</div>";
-					
+				    str="<div class='qnaok'>";
+					str+="<span>idx : "+idx+"</span><br>";
+					str+="<span>답변완료: "+anw+"</span><br>";
+					str+="<span>내용: "+con+"</span><br>";
+					str+="<span>등록일 : "+day+"</span><br>";
+					str+="</div>";
 				});
 				
-				$(this).next().empty();
-				$(this).next().html(str);
-				
+				$(loc).next().empty();
+				$(loc).next().html(str);
 				
 			},error: function(xhr, status, error){
                 alert(status);
@@ -75,7 +74,7 @@ $(function(){
 			   +"<input type='hidden' name='anw' value='1'>"
 			   +"<input type='hidden' name='mem_f' value='${log_idx}'>"
 			   +"<input type='hidden' name='grp' value='"+grp+"'>"
-			   +"<div><textarea rows='5' cols='70' name='contents'></textarea></div>"
+			   +"<textarea rows='5' cols='70' name='contents'></textarea>"
 			   +"<button type='button' class='anwInsert'>등록</button>"
 			   +"</form>";
 			   
@@ -128,7 +127,7 @@ $(function(){
 	    		<li>mem_f: ${dto.mem_f} </li>
 	    		<li>writeday: ${dto.writeday}
 	    			<div class="anwbtn" grp="${dto.grp}">답변달기</div>
-	    			<div class=""></div>
+	    			<div class="form"></div>
 	    		</li>
 	    	</ul>
    		</div>
