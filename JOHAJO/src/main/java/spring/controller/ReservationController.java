@@ -183,6 +183,7 @@ public class ReservationController {
 	   System.out.println(hsit+" "+hday);
 	   System.out.println(hfname);
 	   System.out.println(hprice);
+	  
 	   System.out.println(hcourse);
 	   model.addObject("hmonth",hmonth);
 	   model.addObject("hday",hday);
