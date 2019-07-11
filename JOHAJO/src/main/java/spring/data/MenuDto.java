@@ -1,50 +1,55 @@
 package spring.data;
 
-import java.sql.Timestamp;
-
 public class MenuDto {
-	private int num;
-	private String writer;
-	private String subject;
-	private String content;
-	private int readcount;
-	private Timestamp writeday;
+	private int idx;
+	private String fname;
+	private int kind;
+	private int calorie;
+	private String img;
+	private int count;
+	private int price;
 	
-	public int getNum() {
-		return num;
+	public int getIdx() {
+		return idx;
 	}
-	public void setNum(int num) {
-		this.num = num;
+	public void setIdx(int idx) {
+		this.idx = idx;
 	}
-	public String getWriter() {
-		return writer;
+	public String getFname() {
+		return fname;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setFname(String fname) {
+		this.fname = fname;
 	}
-	public String getSubject() {
-		return subject;
+	public int getKind() {
+		return kind;
 	}
-	public void setSubject(String subject) {
-		this.subject = subject;
+	public void setKind(int kind) {
+		this.kind = kind;
 	}
-	public String getContent() {
-		return content;
+	public int getCalorie() {
+		return calorie;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setCalorie(int calorie) {
+		this.calorie = calorie;
 	}
-	public int getReadcount() {
-		return readcount;
+	public String getImg() {
+		return img;
 	}
-	public void setReadcount(int readcount) {
-		this.readcount = readcount;
+	public void setImg(String img) {
+		this.img = img;
 	}
-	public Timestamp getWriteday() {
-		return writeday;
+	public int getCount() {
+		return count;
 	}
-	public void setWriteday(Timestamp writeday) {
-		this.writeday = writeday;
+	public void setCount(int count) {
+		this.count = count;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
 	}
 	
 	
