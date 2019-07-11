@@ -33,4 +33,8 @@ public class StoreService {
 	{
 		return dao.searchCount(name);
 	}
+	public int getDataName(String name)
+	{
+		return dao.getDataName(name);
+	}
 }

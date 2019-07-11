@@ -53,5 +53,8 @@ public class MemberService {
 		dao.memberUpdate(dto);
 	}
 
+	public int usePoint(int idx) {
+		return dao.usePoint(idx);
+	}
 
 }

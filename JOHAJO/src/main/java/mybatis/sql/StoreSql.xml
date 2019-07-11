@@ -14,7 +14,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<select id="storePagingList" parameterType="HashMap" resultType="sdto">
 	   <![CDATA[
-	   
 	   	select a.* from (select ROWNUM as RNUM,
 		b.* from (select * from store order by idx desc)b )a 
 		where a.RNUM>=#{start} and a.RNUM<=#{end}
@@ -37,4 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="storeDelete" parameterType="int">
 		delete from store where idx=#{idx}
 	</delete>
+	<select id="storeGetDataName" parameterType="String" resultType="int">
+		select idx from store where name=#{name}
+	</select>
 </mapper>

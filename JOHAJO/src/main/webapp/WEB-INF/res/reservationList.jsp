@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 <script type="text/javascript">
    $(function(){
-	   
+	  	addFoodIdx="";
 		function calender(num){
    		
    		$.ajax({
@@ -42,9 +42,9 @@
             	year=s.find("year").text();
             	year1=parseInt(year);
             	today=s.find("today").text();
-            	console.log(lastday1);
-            	console.log(week1);
-            	console.log(month1);
+            	//console.log(lastday1);
+            	//console.log(week1);
+            	//console.log(month1);
             	var s1=month1+1;
                	var s2=month1-1;
             	//var lo2='onclick="calender('+s1+')"';
@@ -52,8 +52,8 @@
             	//var lo3='onclick="calender('+s2+')"';
             	//console.log(lo3);
             		str2+="<ul>";
-            		console.log("현재"+currentMonth1);
-            		console.log("처음달"+month1);
+            		//console.log("현재"+currentMonth1);
+            		//console.log("처음달"+month1);
             	if(currentyear1==year1){
             		if(currentMonth1<month1){
             		str2+="<li class='prev' month="+s2+">&#10094;</li>";
@@ -96,8 +96,8 @@
             	}
             	str+="</ul>";
         		str+="</li>";
-        		console.log(str2);
-   				console.log(str);
+        		//console.log(str2);
+   				//console.log(str);
             });
             
             $("div.month").html(str2);
@@ -117,18 +117,21 @@
 		var s=0;
 		s=$(this).attr("month");
 		s1=s-1;
-		console.log(s1);
+		//console.log(s1);
 		calender(s1);
 	});
 	$(document).on('click','.prev',function() { 
 		var s=0;
 		s=$(this).attr("month");
 		s1=s-1;
-		console.log(s1);
+		//console.log(s1);
 		calender(s1);
 	});
-     $("span.selClass").click(function(){
-        var a=$(this).attr('sel');
+     
+    $(document).on('click','span.selClass',function() { 
+        var a=$(this).attr('tablen');
+        
+       // location.href="/resApp6.do?";
         $("sit").val(a);
         $(".cal").css("display","none");
         $(".store").css("display","none");
@@ -136,7 +139,7 @@
         $(".selmenu").css("display","block");
         $("b.seleted").html(a);
         $(".hsit").val(a);
-     });
+    });
      $(document).on('click','li.day',function() { 
   	   var m=$(this).attr("month");
   	   var d=$(this).text();
@@ -154,6 +157,32 @@
   	   var n=$(this).attr("store");
    	   var t=$(this).attr("time");
    	   var s=n+" "+t;
+   	 	$.ajax({
+	        type:'get',
+	        url:'reservation2.do',
+	        data:{"store":n},
+	        success:function(redata){
+	        	var str="";
+	        	var cl="class='selClass'";
+	        	var img="src='image/home.jpg'";
+	        $(redata).find("data").each(function(){
+	        	var s=$(this);
+            	var top=s.find("toplo").text();
+            	var left=s.find("leftlo").text();
+            	var max=s.find("maxres").text();
+            	console.log("top"+top+"left"+left);
+	        	var tablename=s.find("tbname").text();
+            	console.log("table_n"+tablename);
+            	str+="<span class='selClass' tablen="+tablename+">";
+            	str+="<img "+img+" "+cl+" style='position: relative;max-width: 20px;top:"+top+"px;left:"+left+"px;'>";
+            	str+="</span>";	
+	        });
+	       
+	        $("div.selsit").html(str);
+	        },error : function( jqXHR, textStatus, errorThrown ) {
+	        	alert( jqXHR.status );
+	        }
+	        });
    	   $(".selStore").html(s)
    	   $(".hstore").val(n);
    	   $(".htime").val(t);
@@ -227,18 +256,36 @@
                   $("span#datatest123").html(str);
                   
                   
-            },error:function(){
-            alert("error");
+            },error : function( jqXHR, textStatus, errorThrown ) {
+
+            	alert( jqXHR.status );
+
             }
          });
      });
      $(document).on('click','Button.btnadd',function() { 
+    	 $(this).css("display","none");
+    	 
     	 //$(this).css("display","none");
-    	 console.log(3);
+    	 //console.log(3);
     	 var str="";
          var num=$(this).attr("idx");
+         if(addFoodIdx==""){
+        	 addFoodIdx+=num;
+         }else{
+         	addFoodIdx+="/"+num;
+         }
+         console.log(addFoodIdx);
          var name=$(this).attr("fname");
-         //var count=$("b.con").attr("count");
+         /* var count=$("b.con").attr("count");
+         var count1=0;
+         if(count==null){
+        	 count1=1;
+         }else{
+        	 count1=parseInt(count);
+         }
+         console.log(count); */
+         
          var i=0;
          
          //console.log("ajax"+num);
@@ -262,8 +309,8 @@
                      str+="<td>fname:"+fname+"<br>";
                      str+="calorie:"+calorie+"<br>";
                      str+="price:"+price+"<br></td>";
-                     str+="<td><button type='button' class='btndel' fname='"+fname+"' price='"+price+"' idx='"+i+"'>-</button></td>";
-                     //str+="<td>수량 :<b class='con' count=${count}>${count}</b></td>";
+                     str+="<td><button type='button' class='btndel' fname='"+fname+"' price='"+price+"' idx='"+idx+"' icount='"+i+"'>-</button></td>";
+                     str+="<td>수량  <b class='countdel' idx="+idx+">-</b><b class='con'>1</b><b class='countadd'>+</b></td>";
                      str+="</tr></table>"
                    	 i++;
                      
@@ -277,16 +324,47 @@
             }
          });
      });
+     $(document).on('click','b.countdel',function() { 
+    	var str="";
+    	var count=$("b.con").text();
+    	//console.log(count);
+    	var count1=parseInt(count)-1;
+    	//console.log(count1);
+    	$("b.con").html(count1);
+     });
+     $(document).on('click','b.countadd',function() { 
+     	var str="";
+     	var count=$("b.con").text();
+     	//console.log(count);
+     	var count1=parseInt(count)+1;
+     	//console.log(count1);
+     	$("b.con").html(count1);
+      });
      $(document).on('click','Button.btndel',function() { 
+    	 var length=$("Button.btnadd").length;
+    	 var idx=$(this).attr("idx");
     	 
+    	 var idx1=parseInt(idx);
+    	 console.log(idx);
+    	 this.addnum=idx;
+    	 for(x=0;x<length;x++){
+    		 var abtn=$("button:eq("+x+")").attr("idx");
+    		 var abtn1=parseInt(abtn);
+    		 if(idx1==abtn1){
+    			 $("button:eq("+x+")").css("display","block");
+    			 break;
+    		 }
+    	 }
     	 var str="";
-         var num=$(this).attr("idx");
+         var num=$(this).attr("icount");
+         var num1=parseInt(num);
+         
          var i=0;
-         console.log("ajax"+num);
+         //console.log("ajax"+num1);
          $.ajax({
             type:'get',
             url:'resAppetizer3.do',
-            data:{"idx":num},
+            data:{"idx":num1},
             success:function(redata){
             	
             	 $(redata).find("data").each(function(){
@@ -302,7 +380,7 @@
                      str+="<td>fname:"+fname+"<br>";
                      str+="calorie:"+calorie+"<br>";
                      str+="price:"+price+"<br></td>";
-                     str+="<td><button type='button' class='btndel' fname='"+fname+"' price='"+price+"' idx='"+i+"'>-</button></td>";
+                     str+="<td><button type='button' class='btndel' fname='"+fname+"' price='"+price+"' idx='"+idx+"' icount='"+i+"'>-</button></td>";
                      str+="</tr></table>"
                    	 i++;
                      
@@ -319,6 +397,39 @@
       
             }
          });
+        
+         //console.log("idx1"+idx1);
+         var addFoodIdx1="";
+         var j=0;
+         
+         var num3=$(this).attr("idx");
+        		var i=0;
+         		var addF=addFoodIdx.split('/');
+         		for(var s in addF){
+               	 j++;
+                }
+         		
+         		if(j>1){
+         			for(var s in addF){
+        	 			//console.log("ㅁ"+addF[s]);
+        	 			var str=parseInt(addF[s]);
+        	 			console.log(str+"="+num3);
+        	 			if(str!=num3){
+        	 				if(i==0){
+        	 					addFoodIdx1=addF[s];
+        	 					i++;
+        	 				}else{
+        	 					addFoodIdx1+="/"+addF[s];
+        	 					console.log("여기는"+addFoodIdx1);
+        	 				}
+        	 				
+        	 			}
+        	 		}
+         		}
+         addFoodIdx=addFoodIdx1;
+         			console.log("addF "+addFoodIdx);
+         	
+         
      });
      $(document).on('click','Button.btnend',function() { 
     	 $.ajax({
@@ -334,8 +445,8 @@
                       p+=price;
                       n+=(n.length==0?"":",")+fname;
              	 });
-             	 console.log(p);
-             	 console.log(n);
+             	 //console.log(p);
+             	 //console.log(n);
              	$(".hprice").val(p);
                 $(".hfname").val(n);
                 str="";
@@ -346,6 +457,44 @@
              	alert( jqXHR.status );
              }
      });
+   });
+   $(".resok").click(function(){
+	   	  var day=$("b.seday").text();
+		  var store=$("b.selStore").text();
+		  var selsit=$("b.seleted").text();
+		  var fname=$("input.hfname").val();
+		  var course=$("input.hcourse").val();
+		  console.log("fname"+fname);
+		  console.log("course"+course);
+		  if(day==""){
+			  alert("날짜를 선택해주세요");
+			  $(".cal").css("display","block");
+		      $(".store").css("display","none");
+		      $(".selsit").css("display","none");
+		      $(".selmenu").css("display","none");
+		      return false;
+		  }else if(store==""){
+			  alert("매장 및 시간을 선택해주세요");
+			  $(".cal").css("display","none");
+		      $(".store").css("display","block");
+		      $(".selsit").css("display","none");
+		      $(".selmenu").css("display","none");
+		      return false;
+		  }else if(selsit==""){
+			  alert("자리를 선택해주세요");
+			  $(".cal").css("display","none");
+		      $(".store").css("display","none");
+		      $(".selsit").css("display","block");
+		      $(".selmenu").css("display","none");
+		      return false;
+		  }else if(fname==""&&course==""){
+			  alert("메뉴를 선택해주세요");
+			  $(".cal").css("display","none");
+		      $(".store").css("display","none");
+		      $(".selsit").css("display","none");
+		      $(".selmenu").css("display","block");
+		      return false;
+		  }
    });
      
 });
@@ -413,15 +562,15 @@
 						</li>
 					</ul></li>
 				<li><span onclick="selectsit()">자리선택 <b class="seleted"></b></span>
-               <div class="selsit">
-                  <c:set var="it">A,B,C,D,E</c:set>
+               <div class="selsit" style="width: 200px;height: 200px;position: relative;">
+                  <%-- <c:set var="it">A,B,C,D,E</c:set>
                   <c:forEach var="key" items="${it }">
                      <c:forEach var="i" begin="1" end="5">
                         <span class="selClass" sel="${key}${i}"> <img src="#">
                         </span>
                      </c:forEach>
                      <br>
-                  </c:forEach>
+                  </c:forEach> --%>
                </div></li>
 
             <li><span onclick="menu()">메뉴선택</span>
@@ -463,7 +612,7 @@
          <input type='hidden' class='hfname' name='hfname' value=''>
          <input type='hidden' class='hprice' name='hprice' value=''>
          <input type='hidden' class='hcourse' name='hcourse' value=''>
-         <input type="submit" value="예약">
+         <input type="submit" class="resok" value="예약">
          <input type="button" value="취소">
       </form>
    </div>
@@ -483,18 +632,26 @@
       $(".selmenu").css("display","none");
    }
    function selectsit(){
-	   console.log("1");
-      $(".cal").css("display","none");
-      $(".store").css("display","none");
-      $(".selsit").css("display","block");
-      $(".selmenu").css("display","none");
-   }
+	   //console.log("1");
+	  var day=$("b.seday").text()
+	  var store=$("b.selStore").text()
+	  if(day!=""&&store!=""){
+      	$(".cal").css("display","none");
+      	$(".store").css("display","none");
+      	$(".selsit").css("display","block");
+      	$(".selmenu").css("display","none");
+	  }else if(day==""){
+		  alert("날짜를 선택해주세요")
+	  }else if(store==""){
+		  alert("매장 및 시간을 선택해주세요")
+	  }   
+	 }
    function menu(){
       $(".cal").css("display","none");
       $(".store").css("display","none");
       $(".selsit").css("display","none");
       $(".selmenu").css("display","block");
    }
-  
+   
 </script>
 </html>

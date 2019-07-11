@@ -15,6 +15,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="spring.data.MenuDto" alias="mndto"/>
 		<typeAlias type="spring.data.AllergyDto" alias="adto"/>
 		<typeAlias type="spring.data.CourseDto" alias="cdto"/>
+		<typeAlias type="spring.data.TableDto" alias="tdto"/>
 		
 	</typeAliases>
 
@@ -30,5 +31,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="mybatis/sql/MenuSql.xml"/>
 		<mapper resource="mybatis/sql/AllergySql.xml"/>
 		<mapper resource="mybatis/sql/CourseSql.xml"/>
+		<mapper resource="mybatis/sql/TableSql.xml"/>
 	</mappers>
 </configuration>

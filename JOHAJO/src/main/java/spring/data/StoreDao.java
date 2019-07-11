@@ -33,4 +33,9 @@ public class StoreDao extends SqlSessionDaoSupport {
 		int n=getSqlSession().selectOne("storeSearchCount",name);
 		return n;
 	}
+	public int getDataName(String name)
+	{
+		int n=getSqlSession().selectOne("storeGetDataName",name);
+		return n;
+	}
 }
