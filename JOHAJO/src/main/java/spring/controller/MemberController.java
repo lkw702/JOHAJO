@@ -125,6 +125,7 @@ public class MemberController {
 	@RequestMapping("/userLogout.do")
 	public String userLogout(HttpSession session) {
 		session.removeAttribute("loginok");
+		session.removeAttribute("log_idx");
 		
 		return "redirect:main.do";
 	}
