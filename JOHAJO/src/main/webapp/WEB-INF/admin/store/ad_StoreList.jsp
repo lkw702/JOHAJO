@@ -30,7 +30,7 @@
 		$(".storeDeleteBtn").click(function(){
 			var idx=$(this).val();
 			if(confirm("삭제하시겠습니까?")){
-				location.href='deleteStore.do?idx='+idx;
+				location.href='storeDelete.do?idx='+idx;
 			}else{
 			}
 		});

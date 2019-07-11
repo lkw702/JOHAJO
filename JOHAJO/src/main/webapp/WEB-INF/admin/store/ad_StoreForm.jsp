@@ -19,11 +19,12 @@
 		});
 	});
 	function close_Event(){
-		opener.document.location.reload();
+		opener.parent.location='ad_StoreList.do';
+		window.close();
 	}
 </script>
 </head>
-<body onload="close_Event()">
+<body>
 	<form action="storeInsert.do" method="post">
 		지점명:<input name="name" type="text"><br>
 		x좌표:<input name="xpoint" type="text"><br>
@@ -32,7 +33,7 @@
 		전화:<input name="phone" type="text"><br>
 		영업시간:<input name="ohours" type="text"><br>
 		서비스:<input name="service1" type="text"><br>
-		<input type="submit" value="저장">
+		<input type="submit" value="저장" onclick="close_Event()">
 		<input type="button" value="닫기" class="storeSubBtn">
 	</form>
 </body>

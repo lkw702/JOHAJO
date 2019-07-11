@@ -42,6 +42,9 @@ public class AdminController {
 /*
  * store ************************************************************************
  */
+	//store insert 
+	//==========================================================================
+	
 	@RequestMapping("/ad_StoreList.do")
 	public ModelAndView storeList() {
 		
@@ -75,8 +78,11 @@ public class AdminController {
 		dto.setService(service1);
 		
 		service.insertStore(dto);
-		return "/ad/pop/store/ad_StoreForm";
+		return "redirect:ad_StoreList.do";
 	}
+	
+//store UPDATE 
+//==========================================================================
 	
 	@RequestMapping("/storeUpData.pop")
 	public ModelAndView storeUpData(@RequestParam int idx)
@@ -111,11 +117,15 @@ public class AdminController {
 		return "/ad/pop/store/ad_StoreForm";
 	}
 	
-	@RequestMapping("/deleteStore.do")
-	public void deleteStore(@RequestParam int idx) 
+//store DELETE 
+//==========================================================================
+	
+	@RequestMapping("/storeDelete.do")
+	public String deleteStore(@RequestParam int idx) 
 	{
 		System.out.println("들어오나요"+idx);
 		service.deleteStore(idx);
+		return "redirect:ad_StoreList.do";
 	}
 /*
  * notice ************************************************************************
@@ -130,7 +140,7 @@ public class AdminController {
  */
 	@RequestMapping("/ad_MemberList.do")
 	public String memberList() {
-		return "/ad/admin/ad_MemberList";
+		return "/ad/member/ad_MemberList";
 	}
 /*
  * Q&A ************************************************************************
