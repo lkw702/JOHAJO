@@ -111,18 +111,17 @@ public class MemberController {
 			session.setAttribute("loginok", "yes");//로그인 여부
 			session.setMaxInactiveInterval(60*60*8);
 			 
-			if(id.equals("manager")){
-				return "/admin/ad_MainForm";
-			}else {
-				return "/member/memberLoginOk";
-			}
-			
-			 
-		}else{
-			
-			session.setAttribute("log_res","false");
-			return "redirect:loginform.do";
-		}
+			if(id.equals("manager")) {
+                return "redirect:admain.do";
+             }else {
+                return "/member/memberLoginOk";
+             }
+        
+    }else{
+       
+       session.setAttribute("log_res","false");
+       return "redirect:loginform.do";
+    }
 		
 	}
 	
