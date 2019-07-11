@@ -128,7 +128,7 @@ $(function(){
 	    		<li>mem_f: ${dto.mem_f} </li>
 	    		<li>writeday: ${dto.writeday}
 	    			<div class="anwbtn" grp="${dto.grp}">답변달기</div>
-	    			<div class="anwform"></div>
+	    			<div class=""></div>
 	    		</li>
 	    	</ul>
    		</div>
