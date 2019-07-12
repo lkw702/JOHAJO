@@ -54,4 +54,5 @@ public class MemberDao  extends SqlSessionDaoSupport{
 		return getSqlSession().selectOne("userPointFind",idx);
 	}
 
+
 }

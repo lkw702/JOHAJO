@@ -57,4 +57,5 @@ public class MemberService {
 		return dao.usePoint(idx);
 	}
 
+
 }

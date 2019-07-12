@@ -27,5 +27,11 @@ public class QnaDao  extends SqlSessionDaoSupport{
 		// TODO Auto-generated method stub
 		return getSqlSession().selectOne("QnaMaxNum");
 	}
+	
+	public void myqnaDelete(int idx) {
+		// TODO Auto-generated method stub
+		getSqlSession().delete("QnaDataDelete",idx);
+	}
+
 
 }

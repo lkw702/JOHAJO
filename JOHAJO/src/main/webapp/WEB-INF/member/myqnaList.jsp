@@ -27,12 +27,19 @@
 		list-style: none;
 	}
 	
+	div.green{
+		background-color: #D0F5A9;
+	}
+	
+	div.pink{
+		background-color: #F6CECE;
+	}
 </style>
 <script type="text/javascript">
 $(function(){
-	$(document).on("click","button.anwInsert", function(){
-		
-		var param = $("form[name=answer]").serialize();
+	$(document).on("click","button.anwok", function(){
+		var loc = $(this);
+		var param = $("form[name=answerform]").serialize();
 		
 		$.ajax({
 			type: "post",
@@ -47,20 +54,20 @@ $(function(){
 					con=s.find("con").text();
 					day=s.find("day").text();
 					
-					    str="<div class='qnaok'>";
-						str+="<span>idx : "+idx+"</span><br>";
-						str+="<span>답변완료: "+anw+"</span><br>";
-						str+="<span>내용: "+con+"</span><br>";
-						str+="<span>등록일 : "+day+"</span><br>";
-						str+="</div>";
+				    str="<div class='anwform'>";
+					str+="<span>idx : "+idx+"</span><br>";
+					str+="<span>답변완료: "+anw+"</span><br>";
+					str+="<span>내용: "+con+"</span><br>";
+					str+="<span>등록일 : "+day+"</span><br>";
+					str+="<button type='button' class='anwdel' idx='${dto.idx}'>삭제</button>";
+					str+="</div>";
 					
 				});
 				
-				$(this).next().empty();
-				$(this).next().html(str);
-				
-				
-			},error: function(xhr, status, error){
+				$(loc).parents("div.reply").hide();
+				$(loc).parents("div.box").prev().hide();
+				$(loc).parents("div.box").html(str);
+            },error: function(xhr, status, error){
                 alert(status);
             }
 		});
@@ -68,15 +75,44 @@ $(function(){
 		
 	});
 	
+	$(".anwdel").click(function(){
+		var fm = $(this);
+		if (!confirm("삭제하시겠습니까?")) {
+	        return;
+	    }
+
+		$.ajax({
+			type: "post",
+			url: "myqnaDelete.do",
+			data: {'idx':$(this).attr("idx")},
+            success:function(data){
+            	var str="";
+				$(data).find("data").each(function(){
+					var s=$(this);
+					res=s.find("result").text();
+					$(fm).parents('.qna').remove();
+					
+				});
+				alert("삭제 완료하였습니다."+res);
+				
+			},error: function(xhr, status, error){
+                alert(status);
+            }
+		});
+	});
+	
+	
+	
 	$(".anwbtn").click(function(){
 		var grp=$(this).attr("grp");
-		var fm ="<form name='answer' id='answer'>"
+		var fm ="<div class='reply'>"
+			   +"<form name='answerform' id='answerform'>"
 			   +"<input type='hidden' name='selection' value='0'>"
 			   +"<input type='hidden' name='anw' value='1'>"
 			   +"<input type='hidden' name='mem_f' value='${log_idx}'>"
 			   +"<input type='hidden' name='grp' value='"+grp+"'>"
-			   +"<div><textarea rows='5' cols='70' name='contents'></textarea></div>"
-			   +"<button type='button' class='anwInsert'>등록</button>"
+			   +"<textarea rows='5' cols='30' name='contents'></textarea>"
+			   +"<button type='button' class='anwok'>등록</button>"
 			   +"</form>";
 			   
 		$(this).next().html(fm);
@@ -97,9 +133,11 @@ $(function(){
     
     <c:if test="${dto.anw==0}">
     	<c:set var="on" value="답변대기" />
+    	<c:set var="col" value="green" />
     </c:if>
     <c:if test="${dto.anw==1}">
-    	 <c:set var="on" value="답변완료" />
+    	<c:set var="on" value="답변완료" />
+    	<c:set var="col" value="pink" />
     </c:if>
     
     <c:choose>
@@ -119,7 +157,7 @@ $(function(){
             <c:set var="sel" value="회원정보관련" />  
        </c:when>
    	</c:choose>
-   		<div class="qna" >
+   		<div class="qna ${col}" >
 	   		<ul>
 				<li>${on}  ${sel} </li>
 	    		<li>title: ${dto.title}</li>
@@ -127,8 +165,10 @@ $(function(){
 	    		<li>imagename: ${dto.imagename}</li>
 	    		<li>mem_f: ${dto.mem_f} </li>
 	    		<li>writeday: ${dto.writeday}
+	    		<button type='button' class='anwdel' idx="${dto.idx}">삭제</button>
+			   
 	    			<div class="anwbtn" grp="${dto.grp}">답변달기</div>
-	    			<div class=""></div>
+	    			<div class="box"></div>
 	    		</li>
 	    	</ul>
    		</div>

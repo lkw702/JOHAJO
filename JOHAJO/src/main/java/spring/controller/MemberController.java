@@ -273,7 +273,6 @@ public class MemberController {
 		} else {
 			session.setAttribute("log_res","false");
 			return "redirect:mypassfrom.do";
-		
 		}
 	}
 	
@@ -317,9 +316,6 @@ public class MemberController {
 				return  "/member/mypageMain";
 			}
 			
-			
-			
-			
 		}else {
 			try {
 				response.setContentType("text/html;charset=utf-8");
@@ -338,6 +334,7 @@ public class MemberController {
 		}
 		
 	}
+	
 	
 	
 }

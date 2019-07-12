@@ -32,4 +32,10 @@ public class QnaService {
 		// TODO Auto-generated method stub
 		return dao.qnaMaxIdx();
 	}
+	
+	public void myqnaDelete(int idx) {
+		// TODO Auto-generated method stub
+		dao.myqnaDelete(idx);
+	}
+
 }

@@ -108,4 +108,9 @@ public class QnaController {
 			return model;	
 	}
 	
+	@RequestMapping(value="myqnaDelete.do",method=RequestMethod.POST)
+	public String myqnaDelete(@RequestParam int idx) {
+		service.myqnaDelete(idx);
+		return "/member/myqnaDel";
+	}
 }
