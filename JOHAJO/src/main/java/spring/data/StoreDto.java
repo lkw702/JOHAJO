@@ -10,8 +10,15 @@ public class StoreDto {
 	private String xpoint;
 	private String ypoint;
 	private String addr;
+	private String img;
 	
 
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
 	public int getIdx() {
 		return idx;
 	}

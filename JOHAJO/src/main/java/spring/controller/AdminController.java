@@ -1,16 +1,24 @@
 package spring.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+
+import spring.data.MenuDto;
 import spring.data.StoreDto;
 import spring.service.AdminService;
+import spring.service.MenuService;
 import spring.service.StoreService;
 
 @Controller
@@ -19,13 +27,16 @@ public class AdminController {
 	private AdminService service;
 	@Autowired
 	private StoreService store_service;
+	@Autowired
+	private MenuService menu_service;
+	
 
 	@RequestMapping("/admain.do")
 	public String admain() {
 		return "admain.tiles";
 	}
 /*
- * mainform ************************************************************************
+ * mainform************************************************************************
  */
 	@RequestMapping("/ad_MainForm.do")
 	public String mainForm() {
@@ -36,15 +47,35 @@ public class AdminController {
  * menu ************************************************************************
  */
 	@RequestMapping("/ad_MenuList.do")
-	public String menuList() {
-		return "/ad/admin/ad_MenuList";
+	public ModelAndView menuList() {
+		ModelAndView model=new ModelAndView();
+		
+		List<MenuDto> list=menu_service.getData();
+		List<MenuDto> klist=service.getMenuKind();
+		
+		model.addObject("klist",klist);
+		model.addObject("list",list);
+		model.setViewName("/ad/menu/ad_MenuList");
+		return model;
 	}
+	
+	@RequestMapping("/ad_MenuData.do")
+	public ModelAndView menuData(@RequestParam int kind)
+	{
+		ModelAndView model=new ModelAndView();
+		
+		List<MenuDto> list=menu_service.getDataSel(kind);
+		
+		model.addObject("list",list);
+		model.setViewName("/ad/menu/ad_MenuData");
+		return model;
+		
+	}
+	
 /*
  * store ************************************************************************
  */
-	//store insert 
-	//==========================================================================
-	
+
 	@RequestMapping("/ad_StoreList.do")
 	public ModelAndView storeList() {
 		
@@ -56,18 +87,45 @@ public class AdminController {
 		return model;
 	}
 	
+//store insert 
+//==========================================================================
+	
+	
 	@RequestMapping("/storeInsert.pop")
 	public String storeInsert()
 	{
 		return "/ad/pop/store/ad_StoreForm";
 	}
 	
-	@RequestMapping("/storeInsert.do")
-	public String s_insert(@RequestParam String name,@RequestParam String xpoint,
+	@RequestMapping(value="/storeInsert.do",method=RequestMethod.POST)
+	public ModelAndView s_insert(@RequestParam String name,@RequestParam String xpoint,
 			@RequestParam String ypoint,@RequestParam String addr
 			,@RequestParam String phone,@RequestParam String ohours
-			,@RequestParam String service1)
+			,@RequestParam String service1,@RequestParam MultipartFile photo,
+			HttpServletRequest request)
 	{
+		ModelAndView model=new ModelAndView();
+
+		System.out.println("들어왔니");
+		String path=request.getSession().getServletContext().getRealPath("/save/");
+		System.out.println(path);
+		String fileName=photo.getOriginalFilename();
+		System.out.println(fileName);
+		
+		String saveFile=path+fileName;
+		
+		try {	
+			photo.transferTo(new File(saveFile));
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
 		StoreDto dto=new StoreDto();
 		dto.setAddr(addr);
 		dto.setName(name);
@@ -76,9 +134,13 @@ public class AdminController {
 		dto.setYpoint(ypoint);
 		dto.setOhours(ohours);
 		dto.setService(service1);
+		dto.setImg(fileName);
 		
 		service.insertStore(dto);
-		return "redirect:ad_StoreList.do";
+		
+		model.addObject("fileName",fileName);
+		model.setViewName("/store/storeTest");
+		return model;
 	}
 	
 //store UPDATE 
@@ -101,7 +163,8 @@ public class AdminController {
 	public String so(@RequestParam String name,@RequestParam String xpoint,
 			@RequestParam String ypoint,@RequestParam String addr
 			,@RequestParam String phone,@RequestParam String ohours
-			,@RequestParam String service1,@RequestParam int idx)
+			,@RequestParam String service1,@RequestParam String img,
+			@RequestParam int idx)
 	{
 		StoreDto dto=new StoreDto();
 		dto.setAddr(addr);

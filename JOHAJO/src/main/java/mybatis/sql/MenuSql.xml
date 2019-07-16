@@ -13,4 +13,10 @@
 	<select id="menuSelectTwo" resultType="mndto" parameterType="HashMap">
 		select * from food where kind = #{kind} and idx = #{idx}
 	</select>
+	
+	<!-- admin -->
+	<select id="menuSelectKind" resultType="mndto">
+		select Distinct(kind) from food order by kind
+	</select>
+	
 </mapper>

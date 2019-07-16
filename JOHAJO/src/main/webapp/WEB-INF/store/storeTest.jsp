@@ -15,6 +15,8 @@
 
 </head>
 <body>
-	
+storeTest<br>
+${fileName }
+<img src="../save/${fileName }">
 </body>
 </html>

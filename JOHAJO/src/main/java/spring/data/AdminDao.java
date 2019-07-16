@@ -8,6 +8,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class AdminDao extends SqlSessionDaoSupport {
 	
+	/*
+	 * store==========================================================================
+	 */
+	
+	
 	public List<StoreDto> getStore()
 	{
 		return getSqlSession().selectList("storeAllData");
@@ -26,4 +31,14 @@ public class AdminDao extends SqlSessionDaoSupport {
 	{
 		getSqlSession().delete("storeDelete", idx);
 	}
+	
+	
+	/*
+	 * menu================================================================
+	 */
+	public List<MenuDto> getMenuKind()
+	{
+		return getSqlSession().selectList("menuSelectKind");
+	}
+
 }

@@ -55,6 +55,7 @@
 		<th>연락처</th>
 		<th>서비스</th>
 		<th>영업시간</th>
+		<th>이미지</th>
 		<th>관리</th>
 	</tr>
 		<c:forEach var="dto" items="${list }">
@@ -79,6 +80,9 @@
 			</td>
 			<td>
 				${dto.ohours }
+			</td>
+			<td>
+				${dto.img }
 			</td>
 			<td>
 				<button value="${dto.idx }" class="storeUpDateBtn">수정</button>

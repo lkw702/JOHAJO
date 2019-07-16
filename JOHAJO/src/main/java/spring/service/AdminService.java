@@ -6,12 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import spring.data.AdminDao;
+import spring.data.MenuDto;
 import spring.data.StoreDto;
 
 @Service
 public class AdminService {
 	@Autowired
 	AdminDao dao;
+	
+	/*
+	 * store=========================================================================
+	 */
 	
 	public List<StoreDto> getStore()
 	{
@@ -29,5 +34,12 @@ public class AdminService {
 	public void deleteStore(int idx)
 	{
 		dao.deleteStore(idx);
+	}
+	/*
+	 * menu=================================================================================
+	 */
+	public List<MenuDto> getMenuKind()
+	{
+		return dao.getMenuKind();
 	}
 }

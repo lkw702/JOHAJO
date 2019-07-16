@@ -121,8 +121,6 @@
 		<li><span><a href="ad_StoreList.do">STORE</a></span></li>
 		<li><span><a href="ad_NoticeList.do">NOTICE</a></span></li>
 		<li><span><a href="ad_MemberList.do">회원관리</a></span></li>
-		<li><span><a href="ad_QnAList.do">QnA</a></span></li>
-		<li><span><a href="ad_resList.do">예약관리</a></span></li>		
 	</ul>
 	</div>
 </body>

@@ -20,19 +20,23 @@
 	});
 	function close_Event(){
 		opener.parent.location='ad_StoreList.do';
-		window.close();
+		setTimeout(function(){
+		window.close();			
+		},2000);
 	}
 </script>
 </head>
 <body>
-	<form action="storeInsert.do" method="post">
+	<form action="storeInsert.do" method="post"
+	enctype="multipart/form-data">
 		지점명:<input name="name" type="text"><br>
 		x좌표:<input name="xpoint" type="text"><br>
 		y좌표:<input name="ypoint" type="text"><br>
 		주소:<input name="addr" type="text"><br>
 		전화:<input name="phone" type="text"><br>
 		영업시간:<input name="ohours" type="text"><br>
-		서비스:<input name="service1" type="text"><br>
+		서비스:<input name="service1" type="text"><br>	
+		img:<input type="file" name="photo">
 		<input type="submit" value="저장" onclick="close_Event()">
 		<input type="button" value="닫기" class="storeSubBtn">
 	</form>

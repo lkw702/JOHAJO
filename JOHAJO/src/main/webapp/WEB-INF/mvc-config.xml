@@ -14,11 +14,20 @@
 	<mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
 	<mvc:resources location="/WEB-INF/image/" mapping="/image/**"/>
 	<mvc:resources location="/WEB-INF/store/js/" mapping="/store/js/**"/>
+	<mvc:resources location="/WEB-INF/admin/menu/js/" mapping="/admin/menu/js/**"/>
+	<mvc:resources location="/WEB-INF/admin/store/js/" mapping="/admin/store/js/**"/>
 		
+
 	<context:annotation-config/>
 	<context:component-scan base-package="spring.*.*,spring.*"/>
 
     <mvc:annotation-driven />
+    
+    <!-- file upload setting -->
+    <bean id="multipartResolver"
+    	class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    	<property name="maxUploadSize" value="3500000"/>
+    </bean>
 
 	<!-- <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	        Example: a logical view name of 'showMessage' is mapped to '/WEB-INF/jsp/showMessage.jsp'

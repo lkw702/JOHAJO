@@ -25,7 +25,7 @@
 </script>
 </head>
 <body>
-	<form action="storeUpdata.do" method="post">
+	<form action="storeUpdata.do" method="post" enctype="multipart/form-data">
 		지점명:<input name="name" type="text" value="${dto.name }"><br>
 		x좌표:<input name="xpoint" type="text" value="${dto.xpoint }"><br>
 		y좌표:<input name="ypoint" type="text" value="${dto.ypoint }"><br>
@@ -33,7 +33,8 @@
 		전화:<input name="phone" type="text" value="${dto.phone }"><br>
 		영업시간:<input name="ohours" type="text" value="${dto.ohours }"><br>
 		서비스:<input name="service1" type="text" value="${dto.service }"><br>
-		<input type="hidden" value="${dto.idx }" name="idx">
+		img:<input type="file" name="img" value="${dto.img }"><br>
+ 		<input type="hidden" value="${dto.idx }" name="idx">
 		<input type="submit" value="수정완료" onclick="close_Event()">
 		<input type="button" value="닫기" class="storeSubBtn">
 	</form>

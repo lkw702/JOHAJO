@@ -1,5 +1,4 @@
 function ajax1(idx){
-
 	var str="";
 	var data=$("div.storlist");
 	$.ajax({
