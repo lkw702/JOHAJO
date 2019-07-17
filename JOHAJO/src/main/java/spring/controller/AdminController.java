@@ -136,7 +136,7 @@ public class AdminController {
 		
 		service.insertStore(dto);
 		
-		return "redirect:ad_StoreList.do";
+		return " ";
 	}
 	
 //store UPDATE 

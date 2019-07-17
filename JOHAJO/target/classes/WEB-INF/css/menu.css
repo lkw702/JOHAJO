@@ -1,0 +1,7 @@
+@CHARSET "UTF-8";
+
+/* menuAllergy.jsp */
+	.atab{ padding-left: 100px; border: 1px solid #ddd; padding: 20px; text-align: center; margin-left:20px; margin-right:20px;}
+	.a_li{ list-style: none; padding:12px; display:inline-block; border: 1px solid #E0E0E0;} /* background-color: #E0E0E0;*/
+	.a_div{border:1px solid #ddd; height: 150px; margin-left:20px; margin-right:20px; margin-top:10px; display:none; }
+	.a_li.on { background-color: #E0E0E0; color:#EF5350; }
