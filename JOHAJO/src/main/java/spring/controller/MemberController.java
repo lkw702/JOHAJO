@@ -111,13 +111,17 @@ public class MemberController {
 			session.setAttribute("loginok", "yes");//로그인 여부
 			session.setMaxInactiveInterval(60*60*8);
 			 
-			return "/member/memberLoginOk";
-			 
-		}else{
-			
-			session.setAttribute("log_res","false");
-			return "redirect:loginform.do";
-		}
+			if(id.equals("manager")) {
+                return "redirect:admain.do";
+             }else {
+                return "/member/memberLoginOk";
+             }
+        
+    }else{
+       
+       session.setAttribute("log_res","false");
+       return "redirect:loginform.do";
+    }
 		
 	}
 	
@@ -233,7 +237,28 @@ public class MemberController {
  */	
 	//mygage 이동
 	@RequestMapping("/mypageform.do")
-	public String myPageForm() {
+	public String myPageForm(HttpSession session,
+			HttpServletResponse response) {
+		
+		Integer midx = (Integer)session.getAttribute("log_idx");
+		if(midx == null) {
+			System.out.println("로그인해주세요");
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out;
+			
+			try {
+				out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('로그인 해주세요.');location.href='loginform.do';");
+				out.println("</script>");
+				out.flush();
+				
+			}catch(IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		}
 		
 		return "/member/mypageMain";
 	}
@@ -270,7 +295,6 @@ public class MemberController {
 		} else {
 			session.setAttribute("log_res","false");
 			return "redirect:mypassfrom.do";
-		
 		}
 	}
 	
@@ -314,9 +338,6 @@ public class MemberController {
 				return  "/member/mypageMain";
 			}
 			
-			
-			
-			
 		}else {
 			try {
 				response.setContentType("text/html;charset=utf-8");
@@ -335,6 +356,7 @@ public class MemberController {
 		}
 		
 	}
+	
 	
 	
 }

@@ -12,6 +12,7 @@
 <script type="text/javascript"
 	src="http://maps.google.com/maps/api/js?key=AIzaSyCzHxv7okfaTei_0eZFMzhSw6cnN-dITSg"></script>
 <script src="<c:url value="/store/js/mapJS.js" />"></script>
+<link href="<c:url value="/css/store.css"/>" rel="stylesheet">
 <script>
 	$(function(){
 		map3();
@@ -22,31 +23,7 @@
 		ajax2(a[0]);
 	}
 </script>
-<style>
 
-div.storlist{
-	width: 1200px;
-	position: relative;
-	
-}
-
-#storeMap1 {
-	width:80%; 
-	height:400px; 
-	clear:both;
-	margin-left: 5%;
-}
-
-div.infostore{
-	position:relative;
-	font-size: 22pt;
-	left: 4%;
-	
-}
-.selStore1{
-	display: none;
-}
-</style>
 </head>
 <body>
 	<div>

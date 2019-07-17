@@ -8,18 +8,32 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-
+<script type="text/javascript">
+	$(function(){
+		$(".course_btn").click(function(){
+			var idx = $(this).attr("idx");
+			location.href="menucourse.do?idx="+idx;
+		});
+	});
+</script>
 </head>
 <body>
 	<div class="course">
-		<div class="select_course">
-			<h1 class="title">Now Course</h1>
-			<ul class="course_list">
-				<li class="course1">A</li>
-				<li class="course2">B</li>
-				<li class="course3">C</li>
-			</ul>
+		<div class="course_select">
+			<button class="course_btn" idx="4">A</button>
+			<button class="course_btn" idx="5">B</button>
+			<button class="course_btn" idx="6">C</button>
 		</div>
+		<div class="course_menu">
+			${dto.appe}<br>
+			${dto.soup}<br>
+			${dto.main}<br>
+			${dto.side}<br>
+			${dto.des}<br>
+			${dto.drink}<br>
+			${dto.tot_pri}<br>
+		</div>
+			
 	</div>
 </body>
 </html>

@@ -30,24 +30,12 @@
 		   	<input type="radio" name="selection" value="5"> 회원정보 관련<br>
 		   </li>
 		   <li>
-		   		<span>예약 현황</span>
-		   		<select name="res_idx" id="res_idx">
-		   			<option value="1">2019.07.25 [코스A] 스테이크 </option>
-		   			<option value="2">2019.08.02 [코스B] 특별할인 </option>
-		   			<option value="3">2019.08.15 [코스D] 스페셜 파스타 </option>
-		   		</select>
-		   </li>
-		   <li>
 		   	<span>제목</span>
 		   	<input type="text" name="title" id="title">
 		   </li>
 		   <li>
 		   	<span>내용</span>
-		   	<textarea rows="5" cols="70" name="contents"></textarea>
-		   </li>
-		   <li>
-		   	<span>파일첨부</span>
-		   	<input type="file" name="imagename">
+		   	<textarea rows="5" cols="70" name="content"></textarea>
 		   </li>
 	   </ul>
    </div>

@@ -48,6 +48,11 @@ public class MemberDao  extends SqlSessionDaoSupport{
 		getSqlSession().update("userinfoUpdate",dto);
 	}
 
+	public int usePoint(int idx) {
+		// TODO Auto-generated method stub
+		
+		return getSqlSession().selectOne("userPointFind",idx);
+	}
 
 
 }

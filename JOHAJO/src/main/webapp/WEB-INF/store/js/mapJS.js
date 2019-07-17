@@ -16,18 +16,36 @@ function ajax1(idx){
 					service=s.find("service").text();
 					phone=s.find("phone").text();
 					addr=s.find("addr").text();
+					open=s.find("ohours").text();
 					
 					var serviceArray=service.split(',');
 					
-					str+="<div class='infostore'>";
-					str+="<span class='infoNmae'>점포명 : "+name+"</span><br>";
-					str+="<span class='infoHP'>연락처 : "+phone+"</span><br>";
-					str+="<span class='infoAddr'>주    소 : "+addr+"</span><br>";
-					str+="편의시설:";
-					for(var i in serviceArray)
-					str+="<span class='infoService'><img src='image/"+serviceArray[i]+".PNG' style='width:40px;'>"+serviceArray[i]+"</span>";
-					str+="<a href='gores.do?idx="+idx+"'>예약하기</a>"
-					str+="</div>";
+					str+="<table class='infostore'>";
+					str+="<tr>";
+					str+="<td>점포명</td>";
+					str+="<td>"+name+"</td>";
+					str+="</tr>";
+					str+="<tr>";
+					str+="<td><img src='image/phone.PNG'>전화</td>";
+					str+="<td>"+phone+"</td>";
+					str+="</tr>";					
+					str+="<tr>";
+					str+="<td><img src='image/addr.PNG'>주소</td>";
+					str+="<td>"+addr+"</td>";
+					str+="</tr>";
+					str+="<tr>";
+					str+="<td><img src='image/open.PNG'>주소</td>";
+					str+="<td>"+open+"</td>";
+					str+="</tr>";
+					str+="<tr>";
+					str+="<td><img src='image/service.PNG'>서비스</td>";
+					str+="<td>";
+					for(var i in serviceArray){
+						str+="<img src='image/"+serviceArray[i]+".PNG' width='40'>"+serviceArray[i];
+					}
+					str+="</td>";
+					str+="</tr>";	
+					str+="</table>";
 					
 				});
 			$(data).html(str);
@@ -57,18 +75,37 @@ function ajax2(idx){
 					service=s.find("service").text();
 					phone=s.find("phone").text();
 					addr=s.find("addr").text();
+					open=s.find("ohours").text();
 					
 					var serviceArray=service.split(',');
 					
-					str+="<div class='infostore'>";
-					str+="<span class='infoNmae'>점포명 : "+name+"</span><br>";
-					str+="<span class='infoHP'>연락처 : "+phone+"</span><br>";
-					str+="<span class='infoAddr'>주    소 : "+addr+"</span><br>";
-					str+="편의시설:";
-					for(var i in serviceArray)
-					str+="<span class='infoService'><img src='image/"+serviceArray[i]+".PNG' style='width:40px;'>"+serviceArray[i]+"</span>";
-					str+="<a href='gores.do?idx="+idx+"'>예약하기</a>"
-					str+="</div>";
+					str+="<table class='infostore'>";
+					str+="<tr>";
+					str+="<td>점포명</td>";
+					str+="<td>"+name+"</td>";
+					str+="</tr>";
+					str+="<tr>";
+					str+="<td><img src='image/phone.PNG'>전화</td>";
+					str+="<td>"+phone+"</td>";
+					str+="</tr>";					
+					str+="<tr>";
+					str+="<td><img src='image/addr.PNG'>주소</td>";
+					str+="<td>"+addr+"</td>";
+					str+="</tr>";
+					str+="<tr>";
+					str+="<td><img src='image/open.PNG'>주소</td>";
+					str+="<td>"+open+"</td>";
+					str+="</tr>";
+					str+="<tr>";
+					str+="<td><img src='image/service.PNG'>서비스</td>";
+					str+="<td>";
+					for(var i in serviceArray){
+						str+="<img src='image/"+serviceArray[i]+".PNG' width='40'>"+serviceArray[i];
+					}
+					str+="</td>";
+					str+="</tr>";	
+					str+="</table>";
+					
 				});
 			x=xpoint;
 			y=ypoint;

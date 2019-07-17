@@ -4,7 +4,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="spring.data.MenuDto" alias="bdto"/>
 		<typeAlias type="spring.data.StoreDto" alias="sdto"/>
 		<typeAlias type="spring.data.MemberDto" alias="mdto"/>
 		<typeAlias type="spring.data.NoticeDto" alias="ndto"/>
@@ -12,6 +11,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="spring.data.FaqDto" alias="fdto"/>
 		<typeAlias type="spring.data.FoodDto" alias="fooddto"/>
 		<typeAlias type="spring.data.QnaDto" alias="qdto"/>
+		<typeAlias type="spring.data.MenuDto" alias="mndto"/>
+		<typeAlias type="spring.data.AllergyDto" alias="adto"/>
+		<typeAlias type="spring.data.CourseDto" alias="cdto"/>
+		<typeAlias type="spring.data.TableDto" alias="tdto"/>
 		
 	</typeAliases>
 
@@ -24,6 +27,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="mybatis/sql/FaqSql.xml"/>
 		<mapper resource="mybatis/sql/FoodSql.xml"/>
 		<mapper resource="mybatis/sql/QnaSql.xml"/>
-		
+		<mapper resource="mybatis/sql/MenuSql.xml"/>
+		<mapper resource="mybatis/sql/AllergySql.xml"/>
+		<mapper resource="mybatis/sql/CourseSql.xml"/>
+		<mapper resource="mybatis/sql/TableSql.xml"/>
 	</mappers>
 </configuration>

@@ -34,6 +34,7 @@
 		position: relative;	 
 		margin:0 auto;
 		background-color: #fff; 
+		margin-top:20px;
 	}
 	
 	div.field.f1{
@@ -44,8 +45,8 @@
 	}
 	
 	div.field.f1 p{
-	    margin: 100px 0 20px;
-    	padding: 20px;
+	   padding: 28px 20px 5px;
+       padding: 20px;
     }
     
     div.field.f1 p span{
@@ -54,27 +55,68 @@
     }
     
     div.field.f2{
-    	width: 500px;
-    	height: auto;
+    	width: 650px;
+    	height: 110px;
+   
     }
     
     div.field.f2 ul{
-    	padding: 0;
+        float: left;
+        width: 100%;
+	    padding: 0;
     }
-	
-	div.field.f2 ul li{
-	
-		width: 50%;
-		display: inline-block;
-		list-style: none;
-		line-height: 30px;
-		border: 1px solid;
+    
+    div.field.f2 ul li{
+    	float: left;
+    	width: 33.3%;
+    	height: 110px;
+    	padding: 16px 19px 0;
+    	list-style: none;
+    	border-left: 1px solid;
+    }
+    div.field.f2 ul li:first-child{
+    	border: 0;
+    }
+    
+    div.field.f2 ul li div{
+    	width: 100%;
+    }
+    
+    div.field.f2 ul li div b{
+    	display:inline-block;
+    	margin-bottom: 10px;
+    }
+    
+    div.field.f2 ul li div b a{
+		
+    }
+    
+ 	img.micon{
+ 		max-width: 132px;
+    	margin-top: 37px;
 
-	}
-	div.field.f2 ul li a{
-		text-align: center;
-		display: block;
-	}
+ 	}
+ 	
+ 	div.mbtn1{
+ 		position: relative;
+	    width: 150px;
+	    line-height: 30px;
+	    border: 1px solid gray;
+	    border-radius: 5px;
+	    font-size: 15px;
+	    margin: 0 auto;
+ 	}
+ 	
+ 	div.mbtn1 a{
+ 	    color: #8f8f8f;
+	    font-weight: 500;
+	    text-decoration: none;
+ 	}
+ 	div.mbtn1 a:hover{
+ 		color:#000;
+ 	}
+ 	
+ 	
 
 
 </style>
@@ -94,9 +136,8 @@
 </c:if>
 <%
 	session.removeAttribute("mupdate");
+	
 %>
-	
-	
 	
 	<div class="myform">
 		<div class="logo">
@@ -104,18 +145,44 @@
 		</div>
 	
 		<div class=" field f1">
+			
+		
+			<img src="image/women_icon.png" class="micon">
 			<c:set  var="name" value="${log_name}" />
 			<p>안녕하세요, <span>${name}</span>님 </p>
-			
+			<div class="mbtn1"><a href="mypassfrom.do">회원정보 관리</a></div>
 		</div>
 	
 		<div class="field f2">
 			<ul>
-				<li><a href="mypassfrom.do">회원정보 수정</a></li>
-				<li><a href="myqnaList.do?idx=${log_idx}">1:1 문의하기</a></li>
-				<li><a href="myReservList.do">나의 예약</a></li>
-				<li><a href="myPointList.do">나의 리워즈</a></li>
+				<li>
+					<div class="res">
+						<b>예약 현황</b>
+						<div><span>[강남점]</span><span>나만을 위한 특별한 코스 A</span><span>2019-07-21</span></div>
+						
+					</div>
+				</li>
+				<li>
+					<div class="point">
+						<b>보유 포인트</b>
+						<p>40,200 점</p>
+						
+					</div>
+				</li>
+				<li>
+					<div class="qna">
+						<b><a href="myqnaList.do?idx=${log_idx}">고객의 소리</a></b>
+						<span>답변 대기중 <b>0</b>건</span>
+						<span>답변 완료<b>0</b>건</span>
+					</div>
+				</li>
+				
 			</ul>
+		</div>
+		<div class="field f2">
+			<b>보유 쿠폰</b>
+			<div><span>오픈 기념 30% 할인</span><span>2019-07-30</span></div>
+			<div><span>생일 기념 50% 할인</span><span>2019-07-30</span></div>
 		</div>
 		<div class="clear"></div>
 	</div>

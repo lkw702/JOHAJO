@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="menu">
+	<select id="menuSelect" resultType="mndto">
+		select * from food
+	</select>
+	<select id="menuSelectList" parameterType="int" resultType="mndto">
+		select * from food where kind = #{kind}
+	</select>
+	<select id="menuSelectIdx" parameterType="int" resultType="mndto">
+		select * from food where idx = #{idx}
+	</select>
+	<select id="menuSelectTwo" resultType="mndto" parameterType="HashMap">
+		select * from food where kind = #{kind} and idx = #{idx}
+	</select>
+</mapper>
