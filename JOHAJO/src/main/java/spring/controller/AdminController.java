@@ -98,16 +98,14 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/storeInsert.do",method=RequestMethod.POST)
-	public ModelAndView s_insert(@RequestParam String name,@RequestParam String xpoint,
+	public String s_insert(@RequestParam String name,@RequestParam String xpoint,
 			@RequestParam String ypoint,@RequestParam String addr
 			,@RequestParam String phone,@RequestParam String ohours
 			,@RequestParam String service1,@RequestParam MultipartFile photo,
 			HttpServletRequest request)
 	{
-		ModelAndView model=new ModelAndView();
 
-		System.out.println("들어왔니");
-		String path=request.getSession().getServletContext().getRealPath("/save/");
+		String path=request.getSession().getServletContext().getRealPath("/storeImg/");
 		System.out.println(path);
 		String fileName=photo.getOriginalFilename();
 		System.out.println(fileName);
@@ -134,13 +132,11 @@ public class AdminController {
 		dto.setYpoint(ypoint);
 		dto.setOhours(ohours);
 		dto.setService(service1);
-		dto.setImg(fileName);
+		dto.setPhoto(fileName);
 		
 		service.insertStore(dto);
 		
-		model.addObject("fileName",fileName);
-		model.setViewName("/store/storeTest");
-		return model;
+		return "redirect:ad_StoreList.do";
 	}
 	
 //store UPDATE 

@@ -8,10 +8,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script type="text/javascript"
+	src="http://maps.google.com/maps/api/js?key=AIzaSyCzHxv7okfaTei_0eZFMzhSw6cnN-dITSg"></script>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
+<script src="<c:url value="/store/js/mapJS.js" />"></script>
 <script>
 	$(function(){
 		$(".storeInsertBtn").click(function(){
@@ -36,17 +39,29 @@
 		});
 		
 	});
+	function selStore(idx){
+		alert(idx);
+		ajax2(idx);
+	}
+	
 </script>
 <style>
 	table tr td{
 		width:200px;
 	}
+	#storeMap1 {
+	width:40%; 
+	height:300px; 
+	clear:both;
+}
+	
 	
 </style>
 </head>
 <body>
+	<b>STORE LIST</b> <button class="storeInsertBtn">추가</button>
+<div style="overflow: auto; height: 300px;">
 	<table border="1" class="ad_storeList">
-	<caption>STORE LIST <button class="storeInsertBtn">추가</button></caption>
 	<tr>
 		<th>지점명</th>
 		<th>x좌표</th>
@@ -60,7 +75,7 @@
 	</tr>
 		<c:forEach var="dto" items="${list }">
 		<tr>
-			<td>
+			<td onclick="selStore(${dto.idx})">
 				${dto.name }
 			</td>
 			<td>
@@ -82,7 +97,7 @@
 				${dto.ohours }
 			</td>
 			<td>
-				${dto.img }
+				${dto.photo }
 			</td>
 			<td>
 				<button value="${dto.idx }" class="storeUpDateBtn">수정</button>
@@ -91,5 +106,7 @@
 		</tr>
 		</c:forEach>
 	</table>
+</div>
+<div id="storeMap1"></div>
 </body>
 </html>

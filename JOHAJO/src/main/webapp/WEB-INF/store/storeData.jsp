@@ -14,5 +14,6 @@
 			<xpoint>${sdto.xpoint}</xpoint>
 			<ypoint>${sdto.ypoint}</ypoint>
 			<addr>${sdto.addr}</addr>
+			<photo>${sdto.photo}</photo>
 		</data>
 </store>

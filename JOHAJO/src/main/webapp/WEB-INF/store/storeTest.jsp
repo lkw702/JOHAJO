@@ -17,6 +17,6 @@
 <body>
 storeTest<br>
 ${fileName }
-<img src="../save/${fileName }">
+<img src="./storeImg/${fileName }">
 </body>
 </html>

@@ -33,7 +33,7 @@
 		전화:<input name="phone" type="text" value="${dto.phone }"><br>
 		영업시간:<input name="ohours" type="text" value="${dto.ohours }"><br>
 		서비스:<input name="service1" type="text" value="${dto.service }"><br>
-		img:<input type="file" name="img" value="${dto.img }"><br>
+		사진:<input type="file" name="photo" value="${dto.photo }"><br>
  		<input type="hidden" value="${dto.idx }" name="idx">
 		<input type="submit" value="수정완료" onclick="close_Event()">
 		<input type="button" value="닫기" class="storeSubBtn">

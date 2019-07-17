@@ -16,6 +16,7 @@ function ajax1(idx){
 					phone=s.find("phone").text();
 					addr=s.find("addr").text();
 					open=s.find("ohours").text();
+					photo=s.find("photo").text();
 					
 					var serviceArray=service.split(',');
 					
@@ -44,6 +45,9 @@ function ajax1(idx){
 					}
 					str+="</td>";
 					str+="</tr>";	
+					str+="<tr>";
+					str+="<td><img src='./storeImg/"+photo+"'></td>";
+					str+="</tr>";
 					str+="</table>";
 					
 				});
@@ -75,6 +79,7 @@ function ajax2(idx){
 					phone=s.find("phone").text();
 					addr=s.find("addr").text();
 					open=s.find("ohours").text();
+					photo=s.find("photo").text();
 					
 					var serviceArray=service.split(',');
 					
@@ -103,6 +108,10 @@ function ajax2(idx){
 					}
 					str+="</td>";
 					str+="</tr>";	
+					str+="<tr>";
+					str+="<td><img src='./storeImg/"+photo+"'></td>";
+					str+="</tr>";
+					
 					str+="</table>";
 					
 				});
