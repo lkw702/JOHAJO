@@ -3,6 +3,7 @@ package spring.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,9 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import spring.data.MenuDto;
+import spring.data.NoticeDto;
 import spring.data.StoreDto;
 import spring.service.AdminService;
 import spring.service.MenuService;
+import spring.service.NoticeService;
 import spring.service.StoreService;
 
 @Controller
@@ -29,7 +32,8 @@ public class AdminController {
 	private StoreService store_service;
 	@Autowired
 	private MenuService menu_service;
-	
+	@Autowired
+	private NoticeService notice_service;
 
 	@RequestMapping("/admain.do")
 	public String admain() {
@@ -191,15 +195,110 @@ public class AdminController {
  */
 	
 	@RequestMapping("/ad_NoticeList.do")
-	public String noticeList() {
-		return "/ad/admin/ad_NoticeList";
+	public ModelAndView noticeList(@RequestParam(value="pageNum",defaultValue="1") int currentPage) 
+	{
+		
+		ModelAndView model=new ModelAndView();
+	
+		int totalCount; //총 데이터 개수
+		totalCount=notice_service.getTotalCount();
+		
+		//페이징처리 복붙
+			//페이징처리에 필요한 변수들 선언
+			int totalPage; //총 페이지수
+			int startNum; //각페이지의시작번호
+			int endNum; //각페이지의끝번호
+			int startPage; //블럭의 시작페이지
+			int endPage; //블럭의 끝페이지
+			int no;//출력할 시작번호
+			int perPage=10;//한페이지당 보여질 글의갯수
+			int perBlock=5;//한블럭당 보여질 페이지의 갯수
+			
+			totalPage=totalCount/perPage+(totalCount%perPage>0?1:0);
+			
+			startPage=(currentPage-1)/perBlock*perBlock+1;
+			endPage=startPage+perBlock-1;
+			//마지막 블럭은 끝페이지가 총 페이지수와 같아야함
+			if(endPage>totalPage)
+				endPage=totalPage;
+	
+			startNum=(currentPage-1)*perPage+1;
+			endNum=startNum+perPage-1;
+			//마지막 페이지의 글번호 체크하기
+			if(endNum>totalCount)
+				endNum=totalCount;
+			
+			no=totalCount-(currentPage-1)*perPage;	
+			
+			//전체 데이터 가져오기
+			List<NoticeDto> list=notice_service.getList(startNum, endNum);
+			
+			model.addObject("list", list);
+			model.addObject("currentPage", currentPage);
+			model.addObject("startPage", startPage);
+			model.addObject("endPage", endPage);
+			model.addObject("no", no);
+			model.addObject("totalPage", totalPage);
+		
+		
+		model.addObject("totalCount",totalCount);
+		
+		model.setViewName("/ad/Notice/ad_NoticeList");
+		return model;
 	}
+	
+//notice INSERT==================================================================================
+	@RequestMapping("/notice_insertform.do")
+	public String insertForm()
+	{
+		return "/ad/Notice/ad_writeform";
+	}
+	
+	
+	@RequestMapping("/noticeInsert.do")
+	public String insertNotice(
+			@RequestParam String title,@RequestParam String contents,
+			@RequestParam String selection, @RequestParam(value="hide",defaultValue="1") int hide,
+			@RequestParam(value="image_name",defaultValue="noimage") String image_name,
+			@RequestParam(value="file_name",defaultValue="nofile") String file_name 
+			)
+	{
+		System.out.println("컨트롤러 진입");
+		System.out.println(title);
+		System.out.println(contents);
+		System.out.println(hide);
+		System.out.println(selection);
+		System.out.println(image_name);
+		System.out.println(file_name);
+		
+	
+		NoticeDto dto=new NoticeDto();
+		dto.setTitle(title);
+		dto.setContents(contents);
+		dto.setSelecrtion(selection);
+		dto.setHide(hide);
+		dto.setFile_name(file_name);
+		dto.setImage_name(image_name);
+		
+		notice_service.insertNotice(dto);
+		return "redirect:ad_NoticeList.do";
+	}
+	
+//notice DELETE=================================================================================
+	
+	@RequestMapping("/noticedelete.do")
+	public String noticeDelete(@RequestParam int idx, @RequestParam int pageNum) 
+	{
+		notice_service.deleteNotice(idx);
+		return "redirect:ad_NoticeList.do?pageNum="+pageNum;
+	}
+	
 /*
  * member ************************************************************************
  */
 	@RequestMapping("/ad_MemberList.do")
 	public String memberList() {
-		return "/ad/member/ad_MemberList";
+		return "re/ad/member/ad_MemberList";
 	}
 /*
  * Q&A ************************************************************************
