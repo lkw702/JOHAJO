@@ -10,12 +10,7 @@
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 	<link type="text/css" rel="stylesheet" href="<%= request.getContextPath() %>/css/menu.css"/>
 	<script type="text/javascript">
-		$(document).ready(function(){
-			$("li.answer").css("display","none");
-			$("li.question").click(function(){
-					$(this).next().slideToggle("fast");
-				});
-			});
+		
 		
 		$(function () {	
 			tab('#atab',0);	
@@ -42,26 +37,30 @@
 	
 		        select.addClass('on');
 		        con.eq(i).children().show();
+		        con.eq(i).children().attr("aname");
 		    });
 		}
 	</script>
 	</head>
 	<body>
 		<ul class="atab" id="atab">
-		    <li class="a_li">전체</li> <li class="a_li">난류</li> <li class="a_li">우유</li>	
-		    <li class="a_li">대두</li> <li class="a_li">밀</li> <li class="a_li">돼지고기</li>
-		    <li class="a_li">소고기</li> <li class="a_li">닭고기</li> <li class="a_li">토마토</li>
-		    <li class="a_li">오징어</li> <li class="a_li">조개류</li>	
+		    <li class="a_li">전체</li> <li class="a_li" aname="1">난류</li> <li class="a_li" aname="2">우유</li>	
+		    <li class="a_li" aname="3">대두</li> <li class="a_li" aname="4">밀</li> <li class="a_li" aname="5">돼지고기</li>
+		    <li class="a_li" aname="6">소고기</li> <li class="a_li" aname="7">닭고기</li> <li class="a_li" aname="8">토마토</li>
+		    <li class="a_li" aname="9">오징어</li> <li class="a_li" aname="9">조개류</li>	
 		</ul>
 		<div class="atab_acon" id="atab_acon"> 
 		    	<div>
 		    		<c:forEach var="dto" items="${list}">
 		    		<div class="a_div">
-						<table>
-							<tr>
-								<td>${dto.aname}</td>
-							</tr>
-						</table>
+						${dto.fname}
+		    		</div>
+		    		</c:forEach>
+		    	</div>
+		    	<div>
+		    		<c:forEach var="dto" items="${list}">
+		    		<div class="a_div">
+						${dto.fname}
 		    		</div>
 		    		</c:forEach>
 		    	</div>
@@ -106,14 +105,11 @@
 		    		</div>
 		    	</div>
 		    	<div>
-		    		<div class="a_div" >
-						
+		    		<c:forEach var="dto" items="${list}">
+		    		<div class="a_div">
+						${dto.fname}
 		    		</div>
-		    	</div>
-		    	<div>
-		    		<div class="a_div" >
-						12
-		    		</div>
+		    		</c:forEach>
 		    	</div>
 		</div>
 		    	

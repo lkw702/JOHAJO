@@ -10,40 +10,45 @@
 <style type="text/css">
 	.menulist_list{
 		border: 1px solid gray;
-		width:700px;
-		
+		width:100%;
+	}
+	.menulist_list li{
+		display: inline-block;
 	}
 	#menulist_img{
 		width: 300px;
+		height: 80%;
 	}
 </style>
 <script type="text/javascript">
 $(function(){
-	$(".menulist_list").click(function(){
+	$(".menulist_img").click(function(){
 		var idx = $(this).attr("idx");
 		console.log(idx);
-		window.open('http://localhost:9000/JOHAJO/menusel1.do?idx='+idx, 'testWindow', 'width=1000, height=1000', '_blank');
+		
+		var link = document.location.href;
+		console.log(link);
+		window.open('http://localhost:9000/JOHAJO/menuselpop.do?idx='+idx, 'menulistPop', 'width=350, height=500, left=700, top=100,resizable=no', '_blank');
 	});
-
+	
 });
+
 </script>
 </head>
 <body>
 
 	<div id="menu_list">
-	<div id="largeview">s</div>	
 		<c:forEach var="dto" items="${list}" >	
-				<table class="menulist_list" idx="${dto.idx}">
-				    <tr> 
-				    	<td>
-				    	<img id="menulist_img" class="menu_img" src="http://www.aitwb.org/upload/centers_img/no-image-available.jpg">
-				    	</td>
-				    	<td >${dto.idx}</td>
-				    	<td>${dto.fname}</td>
-				    	<td>${dto.calorie}</td>
-				    	<td>${dto.price}</td>			    	
-				    </tr>
-				</table>
+				<div class="menulist_list" >
+					<ul>
+						<li><img id="menulist_img" class="menulist_img" src="./image/menu04.jpg" idx="${dto.idx}" ></li>
+						<li>${dto.fname}</li>
+						<li>${dto.price} ${dto.idx}${dto.kind }</li>
+						<li><button type="button" onclick="location.href='menuupdateform.do?idx=${dto.idx}'">수정</button></li>
+						
+						<li><button type="button" onclick="location.href='menudelete.do?idx=${dto.idx}&kind=${dto.kind}'">삭제</button></li>
+					</ul>
+				</div>
 		</c:forEach>
 		
 	</div>

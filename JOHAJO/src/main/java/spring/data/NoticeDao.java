@@ -30,4 +30,13 @@ public class NoticeDao extends SqlSessionDaoSupport {
 	{
 		return getSqlSession().selectOne("noticeSelectData",num);
 	}
+
+	public void insertNotice(NoticeDto dto)
+	{
+		getSqlSession().insert("noticeInsert", dto);
+	}
+	public void deleteNotice(int idx)
+	{
+		getSqlSession().delete("noticeDelete",idx);
+	}
 }
