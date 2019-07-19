@@ -26,7 +26,11 @@
 				</td>
 			</tr>
 		</table>
+<<<<<<< HEAD
 		
+=======
+		${dto.title } 아직.... 테이블 수정하고 다시해야함 ㅎㅎㅎㅎ 
+>>>>>>> refs/heads/master
 		<div>
 			<button type="button" onclick="location.href='noticefaq.do?pageNum=${pageNum}'">목록</button>
 		</div>

@@ -16,7 +16,11 @@
 	<mvc:resources location="/WEB-INF/store/js/" mapping="/store/js/**"/>
 	<mvc:resources location="/WEB-INF/admin/menu/js/" mapping="/admin/menu/js/**"/>
 	<mvc:resources location="/WEB-INF/admin/store/js/" mapping="/admin/store/js/**"/>
+<<<<<<< HEAD
 	<mvc:resources location="/smartEditor/" mapping="/smartEditor/**"/>
+=======
+		
+>>>>>>> refs/heads/master
 
 	<context:annotation-config/>
 	<context:component-scan base-package="spring.*.*,spring.*"/>

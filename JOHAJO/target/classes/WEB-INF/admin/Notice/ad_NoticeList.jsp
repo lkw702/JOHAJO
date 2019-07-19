@@ -11,6 +11,7 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <!-- Latest compiled JavaScript -->
+<<<<<<< HEAD
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>     
 <style>
 	ul li{
@@ -78,5 +79,12 @@
 				</c:if>
 			</ul>
 		</div>
+=======
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
+
+</head>
+<body>
+
+>>>>>>> refs/heads/master
 </body>
 </html>

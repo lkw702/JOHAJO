@@ -14,37 +14,35 @@
 	<body>
 			<div class="menu_list">
 				<div class="menu_left">
-				menu_left
 					<div class="menu_mmain">
-						<a href="menusel.do?kind=3">main<img src="http://www.aitwb.org/upload/centers_img/no-image-available.jpg"></a>
+						<a href="menusel.do?kind=3"><img src="./image/menu02.jpg" id="main_img"></a>
 					</div>
-						<div class="menu_left2">
-						menu_left2
-							<div class="menu_soup">
-							<a href="menusel.do?kind=2">soup<img src="http://www.aitwb.org/upload/centers_img/no-image-available.jpg"></a>
-							</div>
-							<div class="menu_dess">
-							<a href="menusel.do?kind=5">dess<img src="http://www.aitwb.org/upload/centers_img/no-image-available.jpg"></a>
-							</div>
+					<div class="menu_left2">
+						<div class="menu_soup">
+						<a href="menusel.do?kind=2"><img src="./image/menu01.jpg" id="soup_img"></a>
 						</div>
+						<div class="menu_dess">
+						<a href="menusel.do?kind=5"><img src="./image/menu01.jpg" id="dess_img"></a>
+						</div>
+					</div>
 				</div>
 				
 				<div class="menu_right">
-				menu_right
 					<div class="menu_appe">
-					<a href="menusel.do?kind=1">appe<img src="http://www.aitwb.org/upload/centers_img/no-image-available.jpg"></a>
+					<a href="menusel.do?kind=1"><img src="./image/menu03.jpg"  id="appe_img"></a>
 					</div>
 						<div class="menu_right2">
-						menu_right2
 							<div class="menu_drink">
-							<a href="menusel.do?kind=6">drink<img src="http://www.aitwb.org/upload/centers_img/no-image-available.jpg"></a>
+							<a href="menusel.do?kind=6"><img src="./image/menu01.jpg" id="drink_img"></a>
 							</div>
 							<div class="menu_side">
-							<a href="menusel.do?kind=4">side<img src="http://www.aitwb.org/upload/centers_img/no-image-available.jpg"></a>
+							<a href="menusel.do?kind=4"><img src="./image/menu01.jpg" id="side_img"></a>
 							</div>
 						</div>
 				</div>
-				
+			</div>
+			<div class="menu_add">
+				<button type="button" onclick="location.href='menuinsert.do'">메뉴 추가</button>
 			</div>
 	</body>
 </html>

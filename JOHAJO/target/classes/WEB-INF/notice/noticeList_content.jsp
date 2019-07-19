@@ -15,6 +15,7 @@
 				<th>
 					&nbsp;${dto.title}
 					<span style="margin-left: 500px; color: lightgray;">
+<<<<<<< HEAD
 						<fmt:formatDate value="${dto.writeday}" pattern="yyyy-MM-dd"/>
 					</span>
 				</th>
@@ -22,6 +23,15 @@
 			<tr height="400">
 				<td valign="top">
 					<span>${dto.contents}</span>
+=======
+						<fmt:formatDate value="${dto.writedate}" pattern="yyyy-MM-dd"/>
+					</span>
+				</th>
+			</tr>
+			<tr height="400">
+				<td valign="top">
+					<span>${dto.content}</span>
+>>>>>>> refs/heads/master
 				</td>
 			</tr>
 		</table>

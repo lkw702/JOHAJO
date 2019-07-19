@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<<<<<<< HEAD
 <style>
 	ul li{
 		list-style: none;
@@ -36,6 +37,32 @@
 						<fmt:formatDate value="${dto.writeday}" pattern="yyyy-MM-dd"/>
 					</td>
 				</tr>
+=======
+</head>
+<body>
+	<div class="l_div1" id="l_div1">
+		${totalCount}개의 글
+		<input type="text" name="search_notice" size="20"><button type="button" id="btn_search_notice">검색</button>
+		<table border="1">
+			<tr>
+				<th>번호</th>
+				<th>제목</th>
+				<th>작성일</th>
+			</tr>
+			<c:forEach var="dto" items="${list}">
+			<c:if test="${dto.selection=='1'}">
+				<tr>
+					<td align="center">${dto.idx}</td>
+						
+					<td align="center">
+						<a href="noticelist_content.do?num=${dto.idx}&pageNum=${currentPage}">${dto.title}</a>
+					</td>
+					<td align="center">
+						<fmt:formatDate value="${dto.writedate}" pattern="yyyy-MM-dd"/>
+					</td>
+				</tr>
+			</c:if>
+>>>>>>> refs/heads/master
 			</c:forEach>
 		</table>
 	</div>
