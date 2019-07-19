@@ -15,7 +15,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="spring.data.AllergyDto" alias="adto"/>
 		<typeAlias type="spring.data.CourseDto" alias="cdto"/>
 		<typeAlias type="spring.data.TableDto" alias="tdto"/>
-		
 	</typeAliases>
 
 	<mappers>
