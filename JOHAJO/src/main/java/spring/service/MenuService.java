@@ -23,13 +23,29 @@ public class MenuService {
 	{
 		return dao.getDataSel(kind);
 	}
-	public List<MenuDto> getDataIdx(int idx)
+	public MenuDto getDataIdx(int idx)
 	{
-		return dao.getDataSel(idx);
+		return dao.getDataIdx(idx);
 	}
 	
 	public List<MenuDto> getDataList(int kind, int idx)
 	{
 		return dao.getDataList(kind, idx);
+	}
+	
+	/* 관리자용 */
+	public void insertMenu(MenuDto dto)
+	{
+		dao.insertMenu(dto);
+	}
+	
+	public void updateMenu(MenuDto dto)
+	{
+		dao.menuUpdate(dto);
+	}
+	
+	public void deleteMenu(int idx)
+	{
+		dao.menuDelete(idx);
 	}
 }

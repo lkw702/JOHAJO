@@ -4,25 +4,31 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-	<div>
-		<c:forEach var="dto" items="${list}" >	
-			<table>
-			    <tr>
-			    	<td>${dto.kind}</td>
-			    	<td>${dto.idx}</td>
-			    	<td>${dto.fname}</td>
-			    	<td>${dto.calorie}</td>
-			    	<td>${dto.price}</td>			    	
-			    </tr>
-			</table>
-		</c:forEach>
-		
-	</div>
-</body>
+	<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<style type="text/css">
+		.list2_img{
+			width:200px;
+		}
+		.list2_div{
+			margin-left : 80px;
+			margin-top : 100px;
+		}
+	</style>
+	</head>
+	<body>
+		<div class="list2_div">
+			<img class="list2_img" src="http://www.aitwb.org/upload/centers_img/no-image-available.jpg">
+			<br>
+			메뉴 ${list2.fname}<br>
+			칼로리 ${list2.calorie}<br>
+			가격 ${list2.price}<br>
+			<c:if test="${list2.origin != '미표시'}">
+				원산지 ${list2.origin}
+			</c:if>
+			<br>
+			<button onclick="self.close()">닫기</button>
+		</div>
+	</body>
 </html>

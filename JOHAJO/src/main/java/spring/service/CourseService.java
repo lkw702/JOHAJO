@@ -22,4 +22,19 @@ public class CourseService {
 		return dao.getCourseData(idx);
 	}
 	
+	public CourseDto getCourseformData(int idx)
+	{
+		return dao.getCourseformData(idx);
+	}
+	
+	/* 관리자용 */
+	public void insertCourse(CourseDto dto) 
+	{
+		dao.insertCourse(dto);
+	}
+	
+	public void updateCourse(CourseDto dto)
+	{
+		dao.courseUpdate(dto);
+	}
 }
