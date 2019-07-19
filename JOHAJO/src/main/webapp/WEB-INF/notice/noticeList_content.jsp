@@ -15,13 +15,13 @@
 				<th>
 					&nbsp;${dto.title}
 					<span style="margin-left: 500px; color: lightgray;">
-						<fmt:formatDate value="${dto.writedate}" pattern="yyyy-MM-dd"/>
+						<fmt:formatDate value="${dto.writeday}" pattern="yyyy-MM-dd"/>
 					</span>
 				</th>
 			</tr>
 			<tr height="400">
 				<td valign="top">
-					<span>${dto.content}</span>
+					<span>${dto.contents}</span>
 				</td>
 			</tr>
 		</table>

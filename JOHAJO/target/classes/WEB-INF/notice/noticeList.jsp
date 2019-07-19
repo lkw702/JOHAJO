@@ -8,6 +8,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	ul li{
+		list-style: none;
+		float: left;
+	}
+</style>
 </head>
 <body>
 	<div class="l_div1" id="l_div1">
@@ -20,18 +26,16 @@
 				<th>작성일</th>
 			</tr>
 			<c:forEach var="dto" items="${list}">
-			<c:if test="${dto.selection=='1'}">
 				<tr>
 					<td align="center">${dto.idx}</td>
 						
 					<td align="center">
-						<a href="noticelist_content.do?num=${dto.idx}&pageNum=${currentPage}">${dto.title}</a>
+						<a href="noticelist_content.do?idx=${dto.idx}&pageNum=${currentPage}">${dto.title}</a>
 					</td>
 					<td align="center">
-						<fmt:formatDate value="${dto.writedate}" pattern="yyyy-MM-dd"/>
+						<fmt:formatDate value="${dto.writeday}" pattern="yyyy-MM-dd"/>
 					</td>
 				</tr>
-			</c:if>
 			</c:forEach>
 		</table>
 	</div>
