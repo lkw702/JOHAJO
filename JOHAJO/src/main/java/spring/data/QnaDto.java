@@ -7,15 +7,15 @@ public class QnaDto {
 	private int anw; //질문 0, 답변0
 	private String selection; //질문카테고리
 	private String title;
-	private String contents;
-	private String imagename;
-	private int res_idx; //예약테이블 idx
+	private String content;
 	private int mem_f; //글쓴idx
 	private Timestamp writeday;
 	private int grp;
 	private int stp;
 	private int lv;
 	
+	private String content2;
+	private Timestamp anwday;
 	
 	public int getIdx() {
 		return idx;
@@ -42,25 +42,13 @@ public class QnaDto {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getContents() {
-		return contents;
+	public String getContent() {
+		return content;
 	}
-	public void setContents(String contents) {
-		this.contents = contents;
+	public void setContent(String content) {
+		this.content = content;
 	}
-	public String getImagename() {
-		return imagename;
-	}
-	public void setImagename(String imagename) {
-		this.imagename = imagename;
-	}
-	
-	public int getRes_idx() {
-		return res_idx;
-	}
-	public void setRes_idx(int res_idx) {
-		this.res_idx = res_idx;
-	}
+
 	public int getMem_f() {
 		return mem_f;
 	}
@@ -91,6 +79,20 @@ public class QnaDto {
 	public void setLv(int lv) {
 		this.lv = lv;
 	}
+	public String getContent2() {
+		return content2;
+	}
+	public void setContent2(String content2) {
+		this.content2 = content2;
+	}
+	public Timestamp getAnwday() {
+		return anwday;
+	}
+	public void setAnwday(Timestamp anwday) {
+		this.anwday = anwday;
+	}
+	
+	
 	
 	
 	

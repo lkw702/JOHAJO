@@ -129,6 +129,7 @@ public class MemberController {
 	@RequestMapping("/userLogout.do")
 	public String userLogout(HttpSession session) {
 		session.removeAttribute("loginok");
+		session.removeAttribute("log_idx");
 		
 		return "redirect:main.do";
 	}
@@ -236,7 +237,28 @@ public class MemberController {
  */	
 	//mygage 이동
 	@RequestMapping("/mypageform.do")
-	public String myPageForm() {
+	public String myPageForm(HttpSession session,
+			HttpServletResponse response) {
+		
+		Integer midx = (Integer)session.getAttribute("log_idx");
+		if(midx == null) {
+			System.out.println("로그인해주세요");
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out;
+			
+			try {
+				out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('로그인 해주세요.');location.href='loginform.do';");
+				out.println("</script>");
+				out.flush();
+				
+			}catch(IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		}
 		
 		return "/member/mypageMain";
 	}

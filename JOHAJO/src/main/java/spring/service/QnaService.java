@@ -1,6 +1,7 @@
 package spring.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,14 +14,14 @@ public class QnaService {
 	@Autowired
 	private QnaDao dao;
 	
-	public int QnaTotalCount() {
+	public int QnaTotalCount(int idx) {
 		// TODO Auto-generated method stub
-		return dao.QnaTotalCount();
+		return dao.QnaTotalCount(idx);
 	}
 
-	public List<QnaDto> QnaSelectList(int idx) {
+	public List<QnaDto> QnaSelectList(Map<String, Integer> map) {
 		// TODO Auto-generated method stub
-		return dao.QnaSelectList(idx);
+		return dao.QnaSelectList(map);
 	}
 
 	public void myqnaInsert(QnaDto dto) {
@@ -36,6 +37,21 @@ public class QnaService {
 	public void myqnaDelete(int idx) {
 		// TODO Auto-generated method stub
 		dao.myqnaDelete(idx);
+	}
+
+	public void myanswerInsert(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		dao.myanswerInsert(map);
+	}
+
+	public void myanwDelete(int idx) {
+		// TODO Auto-generated method stub
+		dao.myanwDelete(idx);
+	}
+
+	public QnaDto myanwSelect(int idx) {
+		// TODO Auto-generated method stub
+		return dao.myansSelect(idx);
 	}
 
 }

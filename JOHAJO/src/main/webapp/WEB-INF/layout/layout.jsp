@@ -12,34 +12,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
 <link href="https://fonts.googleapis.com/css?family=Cute+Font" rel="stylesheet" >
-<style type="text/css">
-	div.layout{
-		position: relative;
-		width: 1264px;
-	    margin: 0 auto;
-	    padding: 0 8px;
-		border: 1px solid black;
-	}
-	div.layout>div{
-		/* float: left; */
-	}
-	div.top{
-		width:1100px;
-		margin: 0 auto;
-		height:172px;
-		border: 1px solid black;
-	}
-	div.main{
-		width:1100px;
-		margin: 0 auto;
-		border: 1px solid black;
-	}
-	div.bottom{
-		width:1100px;
-		margin: 0 auto;
-		border: 1px solid black;
-	}
-</style>
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 	<div class="layout">

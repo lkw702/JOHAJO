@@ -9,109 +9,6 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <c:set var="root" value="<%=request.getContextPath() %>" />
-<style type="text/css">
-	img.logo{
-		width: 150px;
-	    float: left;
-	    height: 85px;
-	    padding-bottom: 20px;
-	}
-	div.topMenu{
-		position: relative;
-	    width: 100%;
-	    margin: 0 auto;
-	    padding-top: 30px;
-	    float: left;
-	}
-	div.mainMenu{
-		position: relative;
-	    width: 100%;
-	    /* margin: 0 auto; */
-	    float: left;
-	}
-	div.mainMenu>ul{
-		float: right;
-	    margin-right: 100px;
-	}
-	div.mainMenu>ul>li{
-		float: left;
-		list-style: none;
-		padding: 15px 10px;
-		
-	}
-	div.mainMenu>ul>li>span>a{
-		padding: 12px 18px 38px;
-	    height: 49px;
-	    color: #808285;
-	    font-size: 17px;
-	    line-height: 1;
-	    letter-spacing: 1px;
-	    font-family: 'Open Sans', 'sans-serif', 'Arial';
-	    font-weight: 700;
-	
-	}
-	div.mainMenu ul.sub{
-		position: absolute;
-	    left: 0;
-	    top: 67px;
-	    width: 100%;
-	    height: 53px;
-	    border-top: 1px solid #efefef;
-	    border-bottom: 1px solid #efefef;
-	    background-color: #fff;
-	    text-align: center;
-	    padding-left:500px;
-	}
-	
-	div.mainMenu ul.sub.s1{
-		padding-left:467px;
-	}
-	
-	div.mainMenu ul.sub.s2{
-		padding-left:580px;
-	}
-	
-	div.mainMenu ul.sub.s3{
-		padding-left:746px;
-	}
-	
-	div.mainMenu ul.sub.s4{
-		padding-left:743px;
-	}
-	
-	
-	div.mainMenu ul.sub li{
-		float: left;
-		list-style: none;
-	}
-	div.mainMenu ul.sub li>a{
-		display: inline-block;
-	    padding: 15px 17px 0;
-	    height: 49px;
-	    color: #808285;
-	    font-size: 14px;
-	    line-height: 1;
-	    letter-spacing: 1px;
-	    font-family: 'Open Sans', 'sans-serif', 'Arial';
-	    font-weight: 700;
-	    
-		
-	}
-	div.mini{
-		position: relative;
-		width: 100%;
-	}
-	
-	div.mini>span{
-		float: right;
-		margin-right:100px;
-	}
-	
-	div.mini>span>a{
-		padding: 0 4px;
-		font-size: 10px;
-	}
-</style>
 <script type="text/javascript">
 var sub="";
 $(function(){
@@ -136,7 +33,8 @@ $(function(){
 %>
 <c:set var="root" value="<%=request.getContextPath() %>"></c:set>
 	<div class="topMenu">
-	
+		<img src="image/logo2.JPG" onclick="location.href='main.do'" class="logo">
+		  
 		<div class="mini">
 			<span>
 				 <c:if test="${loginok =='yes'}">
@@ -152,7 +50,6 @@ $(function(){
 			</span>
 		</div>	
 		<div class="mainMenu">
-		<img src="image/home.jpg" onclick="location.href='main.do'" class="logo">
 		
 			<ul>
 				<li>
