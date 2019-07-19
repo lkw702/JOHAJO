@@ -33,7 +33,7 @@ public class NoticeController {
 			int startPage; //블럭의 시작페이지
 			int endPage; //블럭의 끝페이지
 			int no;//출력할 시작번호
-			int perPage=5;//한페이지당 보여질 글의갯수
+			int perPage=10;//한페이지당 보여질 글의갯수
 			int perBlock=5;//한블럭당 보여질 페이지의 갯수
 			
 			totalPage=totalCount/perPage+(totalCount%perPage>0?1:0);
@@ -70,19 +70,18 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("/noticelist_content.do")
-	public String content(Model model,@RequestParam int num, @RequestParam int pageNum)
+	public ModelAndView content(@RequestParam int idx, @RequestParam int pageNum)
 	{	
+		ModelAndView model=new ModelAndView();
 		//데이터 가져오기
-		NoticeDto dto=service.getData(num);
-		dto.setContent(dto.getContent().replace("\n","<br>"));
+		NoticeDto dto=service.getData(idx);
+		dto.setContents(dto.getContents().replace("\n","<br>"));
 		//model에 저장
-		model.addAttribute("dto",dto);
-		model.addAttribute("pageNum",pageNum);
 		
-		return "/notice/noticeList_content";
+		model.addObject("dto",dto);
+		model.addObject("pageNum",pageNum);
+		model.setViewName("/notice/noticeList_content");
+		
+		return model;
 	}
-	
-	
-	
-	
 }

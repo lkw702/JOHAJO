@@ -5,9 +5,11 @@ public class MenuDto {
 	private String fname;
 	private int kind;
 	private int calorie;
-	private String img;
+	private String imgname;
 	private int count;
 	private int price;
+	private String origin;
+	private int show;
 	
 	public int getIdx() {
 		return idx;
@@ -33,11 +35,11 @@ public class MenuDto {
 	public void setCalorie(int calorie) {
 		this.calorie = calorie;
 	}
-	public String getImg() {
-		return img;
+	public String getImgname() {
+		return imgname;
 	}
-	public void setImg(String img) {
-		this.img = img;
+	public void setImgname(String imgname) {
+		this.imgname = imgname;
 	}
 	public int getCount() {
 		return count;
@@ -50,6 +52,18 @@ public class MenuDto {
 	}
 	public void setPrice(int price) {
 		this.price = price;
+	}
+	public String getOrigin() {
+		return origin;
+	}
+	public void setOrigin(String origin) {
+		this.origin = origin;
+	}
+	public int getShow() {
+		return show;
+	}
+	public void setShow(int show) {
+		this.show = show;
 	}
 	
 	
