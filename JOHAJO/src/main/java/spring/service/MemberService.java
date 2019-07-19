@@ -56,5 +56,7 @@ public class MemberService {
 	public int usePoint(int idx) {
 		return dao.usePoint(idx);
 	}
-
+	public int getUserIdx(String id){
+		return dao.getUserIdx(id);
+	}
 }

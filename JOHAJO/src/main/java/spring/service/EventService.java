@@ -28,4 +28,7 @@ public class EventService {
 	{
 		return dao.getData(idx);
 	}
+	public List<EventDto> getAllData(){
+		return dao.getAllData();
+	}
 }

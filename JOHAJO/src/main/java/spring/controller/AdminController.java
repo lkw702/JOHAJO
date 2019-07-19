@@ -1,5 +1,6 @@
 package spring.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,16 +8,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import spring.data.EventDto;
 import spring.data.StoreDto;
 import spring.service.AdminService;
+import spring.service.EventService;
 import spring.service.StoreService;
 
 @Controller
 public class AdminController {
 	@Autowired
 	private AdminService service;
+	@Autowired
+	private EventService event_service;
 	@Autowired
 	private StoreService store_service;
 
@@ -156,5 +162,9 @@ public class AdminController {
 	public String resList() {
 		return "/ad/admin/ad_ResList";
 	}
+	
+/*
+ * event ************************************************************************
+*/	
 	
 }

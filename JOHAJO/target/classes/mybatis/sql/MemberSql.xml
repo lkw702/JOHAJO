@@ -23,6 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 from member where name=#{name} and hp=#{hp}
 	</select>
 	
+	
 	<select id="selectUserPw"  parameterType="HashMap" resultType="mdto">
 		select name, rpad(substr(password,0,3),
 		length(password),'*')as password
@@ -46,6 +47,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="userPointFind"  parameterType="int" resultType="int">
 		select point from member where idx=#{idx}
 	</select>
-	
+	<select id="memberGetIdx" parameterType="String" resultType="int">
+		select idx from member where id=#{id}
+	</select>
 	
 </mapper>

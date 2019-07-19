@@ -11,6 +11,9 @@ tr td a:HOVER{
 .selmenu{
 	display: none;
 }
+.trfood{
+	cursor: pointer;
+}
 .fimg{
 	max-width: 100px;
 	max-height: 100px;
