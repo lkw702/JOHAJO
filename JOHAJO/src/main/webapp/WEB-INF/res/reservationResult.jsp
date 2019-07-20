@@ -31,7 +31,7 @@ $(function(){
          }
      });
 	}
-	var str1="";
+	/*var str1="";
 	str1+="<table><caption>예약</caption>";
 	str1+="<tr><th>예약일</th><th>"+month+"월"+day+"일</th></tr>";
 	str1+="<tr><th>지점명</th><th>"+store+"</th></tr>";

@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 
 public class EventDto {
 	
-	
 	private int idx;
 	private String title;
 	private String content;
