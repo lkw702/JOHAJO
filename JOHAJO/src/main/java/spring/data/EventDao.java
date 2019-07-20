@@ -25,8 +25,12 @@ public class EventDao extends SqlSessionDaoSupport {
 		return getSqlSession().selectList("eventPagingList",map);		
 	}
 	
-	public EventDto getData(int num)
+	public EventDto getData(int idx)
 	{
-		return getSqlSession().selectOne("eventSelectData",num);
+		return getSqlSession().selectOne("eventSelectData",idx);
+	}
+	
+	public List<EventDto> getAllData(){
+		return getSqlSession().selectList("eventAllData");	
 	}
 }

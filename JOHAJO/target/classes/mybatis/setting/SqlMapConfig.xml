@@ -15,6 +15,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="spring.data.AllergyDto" alias="adto"/>
 		<typeAlias type="spring.data.CourseDto" alias="cdto"/>
 		<typeAlias type="spring.data.TableDto" alias="tdto"/>
+		<typeAlias type="spring.data.CouponDto" alias="coudto"/>
+		<typeAlias type="spring.data.NmBasketDto" alias="nmbadto"/>
+		<typeAlias type="spring.data.singlebasketDto" alias="singlebadto"/>
+		<typeAlias type="spring.data.ReservationDto" alias="resdto"/>
 	</typeAliases>
 
 	<mappers>
@@ -30,5 +34,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="mybatis/sql/AllergySql.xml"/>
 		<mapper resource="mybatis/sql/CourseSql.xml"/>
 		<mapper resource="mybatis/sql/TableSql.xml"/>
+		<mapper resource="mybatis/sql/CouponSql.xml"/>
+		<mapper resource="mybatis/sql/SinglebasketSql.xml"/>
+		<mapper resource="mybatis/sql/NmBasketSql.xml"/>
+		<mapper resource="mybatis/sql/ReservationSql.xml"/>
 	</mappers>
 </configuration>

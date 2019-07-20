@@ -1,3 +1,5 @@
+<%@page import="org.springframework.web.context.request.ServletRequestAttributes"%>
+<%@page import="org.springframework.web.context.request.RequestContextHolder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -9,9 +11,28 @@
 <title>Insert title here</title>
 <script type="text/javascript">
    $(function(){
+	    now=new Date();
+		var mon=now.getMonth()
 	  	addFoodIdx="";
-		function calender(num){
-   		
+	  	var check=$(".check").val();
+	  	console.log(check);
+	  	if(check==0){
+	  		mCheck()
+	  	}
+	  	function mCheck() {
+
+	  		 if (confirm("로그인을 하시면 포인트 및 쿠폰 혜택이 있습니다. 로그인 하시겠습니까?") == true){    //확인
+				
+	  		    location.href="loginform.do?path=reslist.do"; 
+
+	  		 }else{
+	  			location.href="nomember.do";  
+	  		 }
+
+	  	}
+	  		
+	  	function calender(num){
+	  		
    		$.ajax({
    			
             type:'get',
@@ -42,18 +63,9 @@
             	year=s.find("year").text();
             	year1=parseInt(year);
             	today=s.find("today").text();
-            	//console.log(lastday1);
-            	//console.log(week1);
-            	//console.log(month1);
             	var s1=month1+1;
                	var s2=month1-1;
-            	//var lo2='onclick="calender('+s1+')"';
-            	//console.log(lo2);
-            	//var lo3='onclick="calender('+s2+')"';
-            	//console.log(lo3);
             		str2+="<ul>";
-            		//console.log("현재"+currentMonth1);
-            		//console.log("처음달"+month1);
             	if(currentyear1==year1){
             		if(currentMonth1<month1){
             		str2+="<li class='prev' month="+s2+">&#10094;</li>";
@@ -110,8 +122,7 @@
         }
    		});
 	 }
-		now=new Date();
-		var mon=now.getMonth()
+		
 		calender(mon);
 	$(document).on('click','.next',function() { 
 		var s=0;
@@ -130,7 +141,19 @@
      
     $(document).on('click','span.selClass',function() { 
         var a=$(this).attr('tablen');
-        
+        var b=$(".hsit").val();
+        var sit=b+a;
+        $.ajax({
+	        type:'get',
+	        url:'sitsession.do',
+	        data:{"sit":sit},
+	        success:function(redata){
+	        	if(redata==0){
+	        		alert("다른자리를 선택해주세요");
+	        		return false;
+	        	}
+	        }
+        });
        // location.href="/resApp6.do?";
         $("sit").val(a);
         $(".cal").css("display","none");
@@ -138,7 +161,8 @@
         $(".selsit").css("display","none");
         $(".selmenu").css("display","block");
         $("b.seleted").html(a);
-        $(".hsit").val(a);
+        $(".hsit").val(sit);
+        
     });
      $(document).on('click','li.day',function() { 
   	   var m=$(this).attr("month");
@@ -156,11 +180,12 @@
      $("a.selTime").click(function(){
   	   var n=$(this).attr("store");
    	   var t=$(this).attr("time");
+   	   $(".se_sitname").val(n+t);
    	   var s=n+" "+t;
    	 	$.ajax({
 	        type:'get',
 	        url:'reservation2.do',
-	        data:{"store":n},
+	        data:{"store":n,"time":t},
 	        success:function(redata){
 	        	var str="";
 	        	var cl="class='selClass'";
@@ -207,11 +232,11 @@
     	 $(".hprice").val(p1);
      	 console.log(f1+"  "+p1);
      }); */
-     $(document).on('click','Button.btndel',function() { 
+     /*$(document).on('click','Button.btndel',function() { 
     	 f1=$(".hfname").val();
      	 p1=$(".hprice").val();
      	 f1.split(",")
-     });
+     });*/
     
      $(".sidebar2 a").click(function(){
     	 
@@ -224,7 +249,9 @@
             url:'resAppetizer.do',
             data:{"kind":num},
             success:function(redata){
-            	
+            		str+="<table>";
+            		
+            		var i=0;
                   $(redata).find("data").each(function(){
                      var s=$(this);
                      idx=s.find("idx").text();
@@ -233,26 +260,23 @@
                     
                      calorie=s.find("calorie").text();
                      price=s.find("price").text();
+                     if(i==0){
+                    	 str+="<tr class='trfood'>";
+                     }
+                     str+="<td><img class='fimg' src='image/"+imgname+"' title="+fname+" fidx="+idx+"></td>";
                      
+                     if(i<2){
+                    	 i++;
+                     }else if(i==0){
+                    	 str+="</tr>";
+                     }else{
+                    	 i=0;
+                     }
                      
-                     str+="<table><tr class='food' fname="+idx+">";
-                     str+="<td><img class='fimg' src='/image/"+imgname+"'></td>";
-                     str+="<td>fname:"+fname+"<br>";
-                     str+="calorie:"+calorie+"<br>";
-                     str+="price:"+price+"<br></td>";
-                     str+="<td><button type='button' class='btnadd' fname='"+fname+"' price='"+price+"' idx='"+idx+"'>+</button></td>";
-                     str+="</tr></table>"
-                     /* 
-                     str+="idx:"+idx+"&nbsp";
-                     str+="fname:"+fname+"&nbsp";
-                     str+="imgname:"+imgname+"&nbsp";
-                     str+="calorie:"+calorie+"&nbsp";
-                     str+="price:"+price+"&nbsp";
-                     str+="count:"+count+"&nbsp";
-                     str+="<br>"; */
                      
                   });
-            	
+            	  str+="</table>";
+            	  
                   $("span#datatest123").html(str);
                   
                   
@@ -262,85 +286,137 @@
 
             }
          });
+         
      });
-     $(document).on('click','Button.btnadd',function() { 
+     $(document).on('click','img.fimg',function() { 
+    	 var fidx=$(this).attr("fidx");
+    	 //var hidx=$(".hidx").val();
+    	 //var foodname=$(this).attr("title");
+    	 var se_nmname=$(".se_nmname").val();
+    	 $.ajax({
+	            type:'get',
+	            url:'nmbasketadd.do',
+	            data:{"se_nmname":se_nmname,"fidx":fidx},
+	            success:function(redata){
+	            }
+    	 });
+    	 basketCount(se_nmname);
+     });
+     function basketCount(se_nmname){
+    	 $.ajax({
+	            type:'get',
+	            url:'basketcountcheck.do',
+	            data:{"se_nmname":se_nmname},
+	            success:function(redata){
+	            	$("resok").val("예약 "+redata);
+	            }
+ 	 	});
+     }
+     /* $(document).on('click','Button.btnadd',function() { 
     	 $(this).css("display","none");
     	 
     	 //$(this).css("display","none");
     	 //console.log(3);
     	 var str="";
          var num=$(this).attr("idx");
-         if(addFoodIdx==""){
-        	 addFoodIdx+=num;
-         }else{
-         	addFoodIdx+="/"+num;
+         var food=addFoodIdx.split("/");
+         var value=false;
+         for(i=0;i<food.length;i++){
+        	 if(food[i]==num){
+        		 value=true;
+        	 }
          }
-         console.log(addFoodIdx);
-         var name=$(this).attr("fname");
-         /* var count=$("b.con").attr("count");
-         var count1=0;
-         if(count==null){
-        	 count1=1;
+         if(!value){
+	         if(addFoodIdx==""){
+	        	 addFoodIdx+=num;
+	         }else{
+	         	addFoodIdx+="/"+num;
+	         }
+	         console.log(addFoodIdx);
+	         var name=$(this).attr("fname");
+	         /* var count=$("b.con").attr("count");
+	         var count1=0;
+	         if(count==null){
+	        	 count1=1;
+	         }else{
+	        	 count1=parseInt(count);
+	         }
+	         console.log(count); 
+	         
+	         var i=0;
+	         
+	         //console.log("ajax"+num);
+	         $.ajax({
+	            type:'get',
+	            url:'resAppetizer2.do',
+	            data:{"idx":num,"name":name},
+	            success:function(redata){
+	            	     
+	            	     //console.log("count: "+count);
+	            		$(redata).find("data").each(function(){
+	                     var s=$(this);
+	                     idx=s.find("idx").text();
+	                     fname=s.find("fname").text();
+	                     imgname=s.find("imgname").text();
+	                     calorie=s.find("calorie").text();
+	                     price=s.find("price").text();
+	                     
+	                     
+	                     str+="<table><tr class='food' fname="+idx+">";
+	                     str+="<td>fname:"+fname+"<br>";
+	                     str+="calorie:"+calorie+"<br>";
+	                     str+="price:"+price+"<br></td>";
+	                     
+	                     //str+="<td>수량  <b class='countdel' idx="+idx+">-</b><b class='con'>1</b><b class='countadd'>+</b></td>";
+	                     str+="<td><button type='button' class='btndel' fname='"+fname+"' price='"+price+"' idx='"+idx+"' icount='"+i+"' >-</button></td>";
+	                     str+="</tr></table>"
+	                   	 i++;
+	                     
+	                  });
+	                  str+="<button type='button' class='btnend'>선택완료</button>";
+	                  $("div.seleted").html(str);
+	                  
+	                  
+	            },error:function(){
+	            alert("error");
+	            }
+	         });
          }else{
-        	 count1=parseInt(count);
+        	 var count=0;
+        	 count=$(this).attr("count")+1;
+        	 $("b.con").html(count);
          }
-         console.log(count); */
-         
-         var i=0;
-         
-         //console.log("ajax"+num);
-         $.ajax({
-            type:'get',
-            url:'resAppetizer2.do',
-            data:{"idx":num,"name":name},
-            success:function(redata){
-            	     
-            	     //console.log("count: "+count);
-            		$(redata).find("data").each(function(){
-                     var s=$(this);
-                     idx=s.find("idx").text();
-                     fname=s.find("fname").text();
-                     imgname=s.find("imgname").text();
-                     calorie=s.find("calorie").text();
-                     price=s.find("price").text();
-                     
-                     
-                     str+="<table><tr class='food' fname="+idx+">";
-                     str+="<td>fname:"+fname+"<br>";
-                     str+="calorie:"+calorie+"<br>";
-                     str+="price:"+price+"<br></td>";
-                     str+="<td><button type='button' class='btndel' fname='"+fname+"' price='"+price+"' idx='"+idx+"' icount='"+i+"'>-</button></td>";
-                     str+="<td>수량  <b class='countdel' idx="+idx+">-</b><b class='con'>1</b><b class='countadd'>+</b></td>";
-                     str+="</tr></table>"
-                   	 i++;
-                     
-                  });
-                  str+="<button type='button' class='btnend'>선택완료</button>";
-                  $("div.seleted").html(str);
-                  
-                  
-            },error:function(){
-            alert("error");
-            }
-         });
-     });
+     }); */
      $(document).on('click','b.countdel',function() { 
     	var str="";
-    	var count=$("b.con").text();
+    	var count=$(this).next().text();
     	//console.log(count);
     	var count1=parseInt(count)-1;
     	//console.log(count1);
-    	$("b.con").html(count1);
+    	$(this).next().text(count1);
      });
-     $(document).on('click','b.countadd',function() { 
-     	var str="";
-     	var count=$("b.con").text();
+     /* $(document).on('click','b.countadd',function() { 
+    	 var se_nmname=$(".se_nmname").val();
+    	 var fidx=$(this).attr("fidx");
+    	 $.ajax({
+	            type:'get',
+	            url:'countbasket.do',
+	            data:{"se_nmname":se_nmname,"fidx":fidx},
+	            success:function(redata){
+	            	
+	            	
+	            }
+    	 });
+     }); */
+     	/* var str="";
+     	var count=$(this).prev().text();
+     	console.log("count"+count);
      	//console.log(count);
      	var count1=parseInt(count)+1;
      	//console.log(count1);
-     	$("b.con").html(count1);
-      });
-     $(document).on('click','Button.btndel',function() { 
+     	$(this).prev().text(count1); 
+      //});
+     /* $(document).on('click','Button.btndel',function() { 
     	 var length=$("Button.btnadd").length;
     	 var idx=$(this).attr("idx");
     	 
@@ -348,10 +424,10 @@
     	 console.log(idx);
     	 this.addnum=idx;
     	 for(x=0;x<length;x++){
-    		 var abtn=$("button:eq("+x+")").attr("idx");
+    		 var abtn=$("button.btndel:eq("+x+")").attr("idx");
     		 var abtn1=parseInt(abtn);
     		 if(idx1==abtn1){
-    			 $("button:eq("+x+")").css("display","block");
+    			 $("button.btnadd:eq("+x+")").css("display","block");
     			 break;
     		 }
     	 }
@@ -380,6 +456,7 @@
                      str+="<td>fname:"+fname+"<br>";
                      str+="calorie:"+calorie+"<br>";
                      str+="price:"+price+"<br></td>";
+                     //str+="<td>수량  <b class='countdel' idx="+idx+">-</b><b class='con'>1</b><b class='countadd'>+</b></td>";
                      str+="<td><button type='button' class='btndel' fname='"+fname+"' price='"+price+"' idx='"+idx+"' icount='"+i+"'>-</button></td>";
                      str+="</tr></table>"
                    	 i++;
@@ -404,34 +481,38 @@
          
          var num3=$(this).attr("idx");
         		var i=0;
-         		var addF=addFoodIdx.split('/');
-         		for(var s in addF){
-               	 j++;
-                }
-         		
-         		if(j>1){
-         			for(var s in addF){
-        	 			//console.log("ㅁ"+addF[s]);
-        	 			var str=parseInt(addF[s]);
-        	 			console.log(str+"="+num3);
-        	 			if(str!=num3){
-        	 				if(i==0){
-        	 					addFoodIdx1=addF[s];
-        	 					i++;
-        	 				}else{
-        	 					addFoodIdx1+="/"+addF[s];
-        	 					console.log("여기는"+addFoodIdx1);
-        	 				}
-        	 				
-        	 			}
-        	 		}
-         		}
+        		if(addFoodIdx.length>=3){
+	         		var addF=addFoodIdx.split('/');
+	         		for(var s in addF){
+	               	 j++;
+	                }
+	         		if(j>0){
+	         			for(var s in addF){
+	        	 			//console.log("ㅁ"+addF[s]);
+	        	 			var str=parseInt(addF[s]);
+	        	 			console.log(str+"="+num3);
+	        	 			if(str!=num3){
+	        	 				if(i==0){
+	        	 					addFoodIdx1=addF[s];
+	        	 					i++;
+	        	 				}else{
+	        	 					addFoodIdx1+="/"+addF[s];
+	        	 					console.log("여기는"+addFoodIdx1);
+	        	 				}
+	        	 				
+	        	 			}
+	        	 		}
+	         		}
+	         	}else{
+         		addFoodIdx1="";
+     			}
          addFoodIdx=addFoodIdx1;
          			console.log("addF "+addFoodIdx);
          	
          
-     });
+     }); 
      $(document).on('click','Button.btnend',function() { 
+    	 addFoodIdx="";
     	 $.ajax({
              type:'get',
              url:'resAppetizer4.do',
@@ -457,7 +538,7 @@
              	alert( jqXHR.status );
              }
      });
-   });
+   });*/
    $(".resok").click(function(){
 	   	  var day=$("b.seday").text();
 		  var store=$("b.selStore").text();
@@ -496,7 +577,7 @@
 		      return false;
 		  }
    });
-     
+   
 });
 </script>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
@@ -601,7 +682,7 @@
                   </div>
                  
                </div></li>
-               <div><h2>선택한 메뉴</h2><br><div class="seleted"></div></div>
+               
                
          </ul>
          <input type='hidden' class='hmonth' name='hmonth' value=''>
@@ -609,13 +690,16 @@
          <input type='hidden' class='hstore' name='hstore' value=''>
          <input type='hidden' class='htime' name='htime' value=''>
          <input type='hidden' class='hsit' name='hsit' value=''>
-         <input type='hidden' class='hfname' name='hfname' value=''>
-         <input type='hidden' class='hprice' name='hprice' value=''>
          <input type='hidden' class='hcourse' name='hcourse' value=''>
+         <input type='hidden' class='se_nmname' name='se_nmname' value='${se_name}'>
+         <input type='hidden' class='se_sitname' name='se_sitname' value=''>
+         
          <input type="submit" class="resok" value="예약">
          <input type="button" value="취소">
       </form>
    </div>
+  
+   <input type="hidden" class="check" value="${check }">
 </body>
 <script type="text/javascript">
    function selday(){

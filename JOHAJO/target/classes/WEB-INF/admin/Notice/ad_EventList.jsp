@@ -12,9 +12,37 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
-
+<script type="text/javascript">
+	$(function(){
+		$(".adevent_tr").on("click", function(){
+			var idx=$(this).attr("idx");
+			//var pageNum=$(this).attr("pageNum");
+			var count=$(this).attr("count");
+			$.ajax({
+	            type:'get',
+	            url:'ad_eventOneData.do',
+	            data:{"idx":idx,"count":count},
+	            success:function(redata){
+	            	var str="";
+	            $(redata).find("calendar").each(function(){
+	            	
+	            });
+	            }
+		});
+	})
+</script>
 </head>
 <body>
-
+	<table>
+		<caption>이벤트 리스트</caption>
+		<c:forEach var="dto" items="${list}" varStatus="i">
+		<tr class="adevent_tr" idx="${dto.idx}" count="${i.count }">
+			<td>${i.count }</td>
+			<td><img class="adevent_list_img" src="image/${dto.title_img}"></td>
+			<td>${dto.title}</td>
+			<div class="${i.count }"></div>
+		</tr>
+		</c:forEach>
+	</table>
 </body>
 </html>

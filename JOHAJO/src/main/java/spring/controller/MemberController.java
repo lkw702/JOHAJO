@@ -91,7 +91,7 @@ public class MemberController {
 			@RequestParam String id,
 			@RequestParam String pw, 
 			@RequestParam (value="chkid",defaultValue="no") String chkid, 
-			HttpSession session,Model model){
+			HttpSession session,@RequestParam(required=false) String path){
 		
 		
 		
@@ -114,9 +114,12 @@ public class MemberController {
 			if(id.equals("manager")) {
                 return "redirect:admain.do";
              }else {
+            	if(path!=null){
+                 	return "redirect:"+path;
+                }else{
                 return "/member/memberLoginOk";
+                }
              }
-        
     }else{
        
        session.setAttribute("log_res","false");
@@ -136,11 +139,14 @@ public class MemberController {
 	
 	
 	//로그인
-	@RequestMapping("/loginform.do")
-	public String login()
-	{
-		return "/member/memberLoginForm";
-	}
+		@RequestMapping(value="/loginform.do",method=RequestMethod.GET)
+		public ModelAndView login(@RequestParam(required=false) String path)
+		{
+			ModelAndView model=new ModelAndView();
+			model.setViewName("/member/memberLoginForm");
+			model.addObject("path",path);
+			return model;
+		}
 	
 	//아이디 찾기
 	@RequestMapping("/selIdform.do")

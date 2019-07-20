@@ -5,16 +5,18 @@ import java.sql.Date;
 public class ReservationDto {
 	private int idx;
 	private int rem;
-	private Date resdate;
+	private String resdate;
 	private String store;
 	private String restime;
 	private String restable;
 	private String f1;
 	private String f2;
-	private String fsingle;//단품
-	private String coupone;
+	private int fsingle;//단품
+	private String coupon;
 	private String usepoint;
 	private int totalprice;
+	private String nm_name;
+	private int nm_ph;
 	public int getIdx() {
 		return idx;
 	}
@@ -27,11 +29,23 @@ public class ReservationDto {
 	public void setRem(int rem) {
 		this.rem = rem;
 	}
-	public Date getResdate() {
+	public String getResdate() {
 		return resdate;
 	}
-	public void setResdate(Date resdate) {
+	public void setResdate(String resdate) {
 		this.resdate = resdate;
+	}
+	public String getNm_name() {
+		return nm_name;
+	}
+	public void setNm_name(String nm_name) {
+		this.nm_name = nm_name;
+	}
+	public int getNm_ph() {
+		return nm_ph;
+	}
+	public void setNm_ph(int nm_ph) {
+		this.nm_ph = nm_ph;
 	}
 	public String getStore() {
 		return store;
@@ -62,18 +76,18 @@ public class ReservationDto {
 	}
 	public void setF2(String f2) {
 		this.f2 = f2;
-	}
-	public String getFsingle() {
+	} 
+	public int getFsingle() {
 		return fsingle;
 	}
-	public void setFsingle(String fsingle) {
+	public void setFsingle(int fsingle) {
 		this.fsingle = fsingle;
 	}
-	public String getCoupone() {
-		return coupone;
+	public String getCoupon() {
+		return coupon;
 	}
-	public void setCoupone(String coupone) {
-		this.coupone = coupone;
+	public void setCoupon(String coupon) {
+		this.coupon = coupon;
 	}
 	public String getUsepoint() {
 		return usepoint;
